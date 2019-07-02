@@ -1,0 +1,154 @@
+<div class="col-md-3 left_col hidden-print">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="./" class="site_title"></i> <span>سقف مردم</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+            <div class="profile_pic">
+
+                <!--<img src="/<%= user.img %>" alt="..." class="img-circle profile_img">-->
+            </div>
+            <div class="profile_info">
+                <span>خوش آمدید,</span>
+                <h2 style="font-family: IRNazanin"><%= user.name + ' ' + user.family %></h2>
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br/>
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+
+
+            </div>
+            <div class="menu_section">
+                <ul class="nav side-menu">
+                    <% if (fullAccess){%>
+                    <li><a><i class="fa fa-users"></i> مدیریت سطوح دسترسی <span
+                                    class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+
+                            <li><a>خودرو<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/users">کاربران</a></li>
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/roles">نقشها</a></li>
+
+                                </ul>
+                            </li>
+
+                            </li>
+                            <li><a>کسب و کار<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/1">کسب و کار</a></li>
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/2">کارگاه های تولیدی</a></li>
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/3">کارگاه های صنعتی</a></li>
+                                </ul>
+                            </li>
+
+                            </li>
+
+                        </ul>
+                    </li>
+                    <% } %>
+                    <li><a><i class="fa fa-list-alt"></i> اطلاعات پایه سیستم<span
+                                    class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a>خودرو<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/brands">برندها</a>
+                                    </li>
+                                    <li class="sub_menu"><a>خودرو ها<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li class="sub_menu"><a href="<%- host %>/panel/admin/cars">لیست خودرو ها</a>
+                                            <li class="sub_menu"><a href="<%- host %>/panel/admin/cars/add">خودروی جدید</a>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            </li>
+                            <li><a>کسب و کار<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/1">کسب و کار</a></li>
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/2">کارگاه های تولیدی</a></li>
+                                    <li class="sub_menu"><a href="<%- host %>/panel/admin/business/3">کارگاه های صنعتی</a></li>
+                                </ul>
+                            </li>
+                            <li class="sub_menu"><a href="<%- host %>/panel/admin/static/list">محتوای ثابت</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                        <li><a><i class="fa fa-newspaper-o"></i>اخبار<span
+                                        class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/news/add">خبر جدید</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/news/list">لیست اخبار</a>
+
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-question-circle-o"></i>پرسش های متداول<span
+                                        class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/faq/add">مورد جدید</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/faq/list">لیست پرسش های متداول</a>
+
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-money"></i>آگهی های کسب و کار<span
+                                        class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageAdvs/new">آگهی های جدید</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageAdvs/acc">تایید شده ها</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageAdvs/nacc">رد شده ها</a>
+
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-money"></i>آگهی های خودروی نقدی<span
+                                        class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/cash/new">آگهی های جدید</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/cash/acc">تایید شده ها</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/cash/nacc">رد شده ها</a>
+
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-money"></i>آگهی های خودروی اقساطی<span
+                                        class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/ins/new">آگهی های جدید</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/ins/acc">تایید شده ها</a>
+                                <li class="sub_menu"><a href="<%- host %>/panel/admin/manageCarAdvs/ins/nacc">رد شده ها</a>
+
+                            </ul>
+                        </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="تنظیمات">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="تمام صفحه" onclick="toggleFullScreen();">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="قفل" class="lock_btn">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="خروج" href="<%- host %>/panel/logOut">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>
