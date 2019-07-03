@@ -9,37 +9,34 @@
 
 
 
-.no-js .inputfile + label {
+.no-js .inputfile  {
     display: none;
 }
 
 
 /* style 6 */
 
-.inputfile-6 + label {
-    color: #0f0f0f;
-}
+.inputfile-6  {
 
-.inputfile-6 + label {
+    color: #0f0f0f;
     border: 1px solid #1ABB9C;
     background-color: #ffffff;
     padding: 0;
 }
 
-.inputfile-6:focus + label,
-.inputfile-6.has-focus + label,
-.inputfile-6 + label:hover {
+.inputfile-6:focus ,
+.inputfile-6.has-focus ,
+.inputfile-6 :hover {
     border-color: #1ABBAD;
 }
 
-.inputfile-6 + label span,
-.inputfile-6 + label strong {
-    padding: 0.625rem 1.25rem;
+.inputfile-6  strong {
+    padding: 6px;
     /* 10px 20px */
 }
 
-.inputfile-6 + label span {
-    width: 250px;
+.inputfile-6   {
+    width: 500px;
     min-height: 2em;
     display: inline-block;
     text-overflow: ellipsis;
@@ -48,21 +45,21 @@
     vertical-align: top;
 }
 
-.inputfile-6 + label strong {
+.inputfile-6  strong {
     height: 100%;
     color: #ECF0F1;
     background-color: #1ABB9C;
     display: inline-block;
 }
 
-.inputfile-6:focus + label strong,
-.inputfile-6.has-focus + label strong,
-.inputfile-6 + label:hover strong {
+.inputfile-6:focus  strong,
+.inputfile-6.has-focus  strong,
+.inputfile-6 :hover strong {
     background-color: #1ABBAD;
 }
 
 @media screen and (max-width: 50em) {
-	.inputfile-6 + label strong {
+	.inputfile-6  strong {
 		display: block;
 	}
 }

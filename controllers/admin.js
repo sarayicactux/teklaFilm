@@ -46,14 +46,16 @@ module.exports = {
                 })
                 .catch(function () {
                     res.json({
-                        status : false
+                        status : false,
+                        error  : 'Error in input information'
                     });
                 });
 
         }
         else {
             res.json({
-                status : false
+                status : false,
+                error  : 'Error in input information'
             });
         }
 
@@ -172,6 +174,21 @@ module.exports = {
     },
     users:function (req,res) {
 
+
+    },
+    newFreeArt:function (req,res) {
+        type = '';
+        if (req.params.type == '1') type = 'Pdf';
+        if (req.params.type == '2') type = 'Powerpoint';
+        if (req.params.type == '3') type = 'CheetSheet';
+        if (type.length >2){
+            user = req.session.user;
+            res.render('panel/freeArt/add',{type:type,user:user});
+        }
+        else {
+            res.status(500);
+            res.render('errors/500');
+        }
 
     }
 

@@ -1,4 +1,3 @@
-const request       = require('../configs/mod-config');
 const payRequest    = require('request');
 const jsonfile      = require('jsonfile');
 const url           = require('url');
@@ -236,8 +235,8 @@ module.exports = {
         /** The original name of the uploaded file
          stored in the variable "originalname". **/
         var rand = rn(options);
-        var userFile    = 'panel/register/' + rand + req.file.originalname;
-        var target_path = appRoot + '/public/panel/register/' + rand + req.file.originalname;
+        var userFile    = 'panel/files/' + rand + req.file.originalname;
+        var target_path = appRoot + '/public/panel/files/' + rand + req.file.originalname;
         /** A better way to copy the uploaded file. **/
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);

@@ -117,7 +117,6 @@ app.post('/upload', upload.single('file'), function(req, res) {
 //app.use('/panel/seo', checkSeo,seo);
 app.use('/panel/admin', checkAdmin,admin);
 app.use('/panel', panel);
-app.use('/json', json);
 app.use('/', siteRoutes);
 
 
@@ -136,14 +135,8 @@ function checkAdmin(req,res,next){
             return;
         }
         else {
-            user = req.session.user;
-            if (user.aType != 1 ){
-                res.redirect('/panel/logOut');
-                return;
-            }
-            else {
-                next();
-            }
+            next();
+
         }
 
 

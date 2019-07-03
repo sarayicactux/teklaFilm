@@ -19,20 +19,11 @@ module.exports = {
             });
         }
         else {
+
             user = req.session.user;
-            if (user.id == 1){
-                res.redirect('/panel/admin');
+            res.redirect('/panel/admin');
 
-            }
-            else {
-                if (user.aType == 2){
-                    res.redirect('/panel/author');
-                }
-                else{
-                    res.redirect('/');
-                }
 
-            }
 
         }
 
@@ -44,13 +35,12 @@ module.exports = {
         Models.User.findOne({
             where:{email:email}
         }).then(function (row) {
+
             if (row.length != 0){
 
                 if (Password.verify(pass, row.password)){
 
                     req.session.user = row;
-
-                    //req.session.save();
                     req.session.otp = 'set';
                     res.redirect('/panel');
                     // res.render('user/otp');
@@ -67,6 +57,7 @@ module.exports = {
             }
         })
             .catch(function (err) {
+                res.status(500);
                 res.render('errors/500');
                 return;
             })
@@ -113,12 +104,9 @@ module.exports = {
 
             }
             else {
-                if (user.aType == 2){
-                    res.redirect('/panel/author');
-                }
-                else{
-                    res.redirect('/');
-                }
+
+                res.redirect('/');
+
 
 
             }

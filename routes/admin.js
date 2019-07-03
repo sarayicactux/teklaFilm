@@ -12,6 +12,10 @@ var   Models        = require('../models/Models');
 router.route('/').get(admin.dash);
 router.route('/changePass').post(admin.changePass);
 
+router.route('/freeArt/new/:type').get(admin.newFreeArt);
+
+
+
 
 
 

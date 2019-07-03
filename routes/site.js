@@ -21,7 +21,6 @@ router.route('/sitemap.xml').get(sitemap,home.sitemap);
 router.route('/login').post(home.checkLogin);
 router.route('/logOut').get(home.logOut);
 router.route('/register').get(preCond,dailyJson,hourlyJson,home.register);
-router.route('/sendRcode').post(home.sendRcode);
 router.route('/register').post(preCond,dailyJson,hourlyJson,home.registerPeople);
 
 router.route('/siteUploadImage').post(type,home.siteUploadImage);
