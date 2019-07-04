@@ -231,26 +231,30 @@ module.exports = {
     uploading:function(req,res){
         var tmp_path = req.file.path;
         var inputId  = req.body.inputId;
-        var mimeType  = req.body.mimeType;
+        var mimeType = req.body.mimeType;
+        dir = 'files';
+        if (mimeType == '2'){
+            dir = vDir;
+        }
         /** The original name of the uploaded file
          stored in the variable "originalname". **/
         var rand = rn(options);
-        var userFile    = 'panel/files/' + rand + req.file.originalname;
-        var target_path = appRoot + '/public/panel/files/' + rand + req.file.originalname;
+        var userFile    = 'panel/'+dir+'/' + rand + req.file.originalname;
+        var target_path = appRoot + '/public/panel/'+dir+'/' + rand + req.file.originalname;
         /** A better way to copy the uploaded file. **/
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
         src.pipe(dest);
         src.on('end', function() {
             fs.unlinkSync(tmp_path);
-            if (mimeType == '2'){
-                res.render('site/all/videoUploaded',{
+            if (mimeType == '4'){
+                res.render('site/all/imageUploaded',{
                     'userFile':userFile,
                     'inputId' : inputId
                 });
             }
             else {
-                res.render('site/all/imageUploaded',{
+                res.render('site/all/videoUploaded',{
                     'userFile':userFile,
                     'inputId' : inputId
                 });

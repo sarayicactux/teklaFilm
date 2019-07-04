@@ -13,6 +13,12 @@ router.route('/').get(admin.dash);
 router.route('/changePass').post(admin.changePass);
 
 router.route('/freeArt/new/:type').get(admin.newFreeArt);
+router.route('/freeArt/new/create/:type').post(admin.createFreeArt);
+router.route('/freeArt/list/:type').get(admin.list);
+router.route('/freeArt/changeStatus').post(admin.changeStatus);
+router.route('/freeArt/:id/edit').get(admin.edit);
+router.route('/freeArt/:id/update').post(admin.update);
+
 
 
 

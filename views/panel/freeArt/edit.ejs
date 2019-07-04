@@ -33,7 +33,7 @@ des:"TeklaFilm::ControlPanel" ,
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Create new <%-type%> article
+                                <h2>Edit : <%- v.title %>
 
                                 </h2>
 
@@ -45,7 +45,7 @@ des:"TeklaFilm::ControlPanel" ,
                                     <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label>title<span class="required">*</span></label>
-                                            <input type="text" name="title" id="title"  class="form-control persian" >
+                                            <input value="<%- v.title %>" type="text" name="title" id="title"  class="form-control persian" >
                                         </div>
 
 
@@ -54,7 +54,7 @@ des:"TeklaFilm::ControlPanel" ,
                                     <div class="row">
                                         <div class="col-md-12 form-group">
                                             <label>description<span class="required">*</span></label>
-                                            <textarea id="text" rows="15"  class="form-control"></textarea>
+                                            <textarea id="text" rows="15"  class="form-control"><%- v.des %></textarea>
 
 
                                         </div>
@@ -83,7 +83,16 @@ des:"TeklaFilm::ControlPanel" ,
 
 
                                 <span id="tagimage">
-<input id="imagePath" value="" type="hidden" class="form-control">
+<input id="imagePath" value="<%- v.thumb %>" type="hidden" class="form-control">
+                                    <a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.thumb %>','image');" class="btn btn-danger" title="delete"  >
+    <i  class="fa fa-recycle"></i>
+</a>
+<br>
+
+<a href="/<%- v.thumb %>" target="_blank" >
+    <img height="90px" width="90px" src="/<%- v.thumb %>" class="user-image">
+</a>
+
 </span>
 
 
@@ -97,11 +106,11 @@ des:"TeklaFilm::ControlPanel" ,
 
                                         <div class="col-md-4 form-group">
 
-                                            <label   style="padding:2px"><%-type%></label>
+                                            <label   style="padding:2px">File</label>
 
 
 
-                                            <label for="upFile" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose <%-type%></strong></label>
+                                            <label for="upFile" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose file</strong></label>
                                             <input type="file" name="upFile"  onchange="uploadFile('upFile','3')" id="upFile"  class="inputfile" data-multiple-caption="{count} files selected" multiple />
 
                                         </div>
@@ -113,7 +122,16 @@ des:"TeklaFilm::ControlPanel" ,
 
 
                                 <span id="tagupFile">
-<input id="upFilePath" value="" type="hidden" class="form-control">
+<input id="upFilePath" value="<%- v.file_url%>" type="hidden" class="form-control">
+
+The file was loaded successfully, to view it
+<a href="<%- host +'/'+ v.file_url %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
+    <i  class="fa fa-eye-slash"></i>
+</a>
+, for delete
+<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.file_url %>','upFile');" class="btn btn-danger btn-sm" title="delete"  >
+    <i  class="fa fa-recycle"></i>
+</a>
 </span>
 
 
@@ -218,12 +236,14 @@ des:"TeklaFilm::ControlPanel" ,
         }
         else {
             $.ajax({
-                url: 'create/<%-intType%>',
+                url: 'update',
                 data: {
                     des        : des,
                     title      : title,
                     thumb      : thumb,
                     file_url   : file_url,
+                    id         : '<%- v.id %>',
+
                                  },
                 method: 'POST',
                 success :function(data){
@@ -239,7 +259,7 @@ des:"TeklaFilm::ControlPanel" ,
                             styling: 'bootstrap3'
                         });
                         setTimeout(function () {
-                            window.location = "../list/<%-intType%>";
+                            window.location = "../list/<%- v.type %>";
                         }, 1000);
                         $('html, body').animate({ scrollTop: 0 }, 'slow');
 

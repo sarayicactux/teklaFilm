@@ -183,14 +183,142 @@ module.exports = {
         if (req.params.type == '3') type = 'CheetSheet';
         if (type.length >2){
             user = req.session.user;
-            res.render('panel/freeArt/add',{type:type,user:user});
+            res.render('panel/freeArt/add',{intType:req.params.type,type:type,user:user});
         }
         else {
             res.status(500);
             res.render('errors/500');
         }
 
-    }
+    },
+    createFreeArt:function (req,res) {
+        type        = prInj.PrInj(req.params.type);
+        inputs      = prInj.PrAll(req.body);
+
+        title       = inputs.title;
+        des         = inputs.des;
+        thumb       = inputs.thumb;
+        file_url    = inputs.file_url;
+        var slug = title;
+        slug = slug.replace(/ /g,'-');
+        slug = slug.replace('(','-');
+        slug = slug.replace(')','-');
+        slug = slug.replace('(','-');
+        slug = slug.replace(')','-');
+        slug = slug.replace(/--/g,'-');
+        now = new Date();
+        var created_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        var newF = {
+            type           : type,
+            title          : title,
+            slug           : slug,
+            des            : des,
+            file_url       : file_url,
+            thumb          : thumb,
+            created_at     : created_at,
+            updated_at     : created_at
+        };
+
+        Models.FreeArticle.create(newF)
+            .then(function (Fnew) {
+
+
+                res.json({status:true});return;
+
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.json({status:false});return;
+            });
+
+    },
+    list:function (req,res) {
+        type = '';
+        if (req.params.type == '1') type = 'Pdf';
+        if (req.params.type == '2') type = 'Powerpoint';
+        if (req.params.type == '3') type = 'CheetSheet';
+        if (type.length >2){
+            Models.FreeArticle.findAll({
+                where:{
+                    type : req.params.type
+                },
+                order:[
+                    ['id','DESC']
+                ]
+            }).then(function (arts) {
+                user = req.session.user;
+                res.render('panel/freeArt/list',{intType:req.params.type,type:type,arts:arts,user:user});
+            })
+
+        }
+        else {
+            res.status(500);
+            res.render('errors/500');
+        }
+    },
+    changeStatus:function (req,res) {
+        inputs = prInj.PrAll(req.body);
+        Models.FreeArticle.update({
+                status:inputs.status
+            },
+            {
+                where:{id:inputs.id}
+            }
+        ).then(function () {
+            console.log('done');
+            res.json('done');
+        }).catch(function (err) {
+            console.log(err);
+            res.json('error');
+        })
+    },
+    edit:function (req,res) {
+        inputs = prInj.PrAll(req.params);
+        Models.FreeArticle.findByPk(inputs.id)
+            .then(function (v) {
+                user = req.session.user;
+                res.render('panel/freeArt/edit',{v:v,user:user});
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.render('errors/500');
+            })
+    },
+    update:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+        title       = inputs.title;
+        des         = inputs.des;
+        thumb       = inputs.thumb;
+        file_url    = inputs.file_url;
+
+
+        now = new Date();
+        var updated_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+
+        var UpdateC = {
+            title          : title,
+            des            : des,
+            file_url       : file_url,
+            thumb          : thumb,
+            updated_at     : updated_at,
+        };
+        var where = {
+            where:{id:inputs.id}
+        };
+        Models.FreeArticle.update(UpdateC,
+            where)
+            .then(function (rowsUpdated) {
+                res.json({status:true});return;
+            }).catch(function (err) {
+            console.log(err);
+            res.json({status:false});return;
+        })
+
+
+
+    },
 
 
 

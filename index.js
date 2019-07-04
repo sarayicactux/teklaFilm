@@ -24,6 +24,7 @@ const   express = require('express'),
 
 global.appRoot = path.resolve(__dirname);
 global.host = 'http://localhost:3000';
+global.vDir = 'F7L97@I^ktA';
 var     app = express();
 app.use(helmet()); //برای جلوگیری از حملات XSS
 app.use(xssFilter({ setOnOldIE: true }));

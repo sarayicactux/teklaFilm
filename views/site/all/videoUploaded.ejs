@@ -1,12 +1,11 @@
 
 
-فایل با موفقیت بارگزاری شد، برای مشاهده روی
-<a href="<%- host +'/'+ userFile %>" target="_blank"  class="btn btn-info" title="مشاهده" >
+The file was loaded successfully, to view it
+<a href="<%- host +'/'+ userFile %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
     <i  class="fa fa-eye-slash"></i>
-</a> کلیک کنید
+</a>
 <input id="<%- inputId %>Path" name="<%- inputId %>Path" type="hidden" value="<%- userFile %>">
-، برای حذف روی
-<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- userFile %>','<%- inputId %>');" class="btn btn-danger" title="حذف"  >
+, for delete
+<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- userFile %>','<%- inputId %>');" class="btn btn-danger btn-sm" title="delete"  >
     <i  class="fa fa-recycle"></i>
 </a>
-کلیک کنید
