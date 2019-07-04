@@ -6,6 +6,7 @@ const Slider = sequelize.define('Slider', {
     title: Sequelize.STRING,
     des: Sequelize.STRING,
     link: Sequelize.STRING,
+    status: Sequelize.INTEGER,
     created_at: Sequelize.DATE,
     updated_at: Sequelize.DATE,
 },

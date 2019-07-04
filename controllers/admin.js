@@ -319,6 +319,252 @@ module.exports = {
 
 
     },
+    vArtNew:function (req,res) {
+
+            user = req.session.user;
+            res.render('panel/vArt/add',{user:user});
+
+    },
+    vArtCreate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+
+        title       = inputs.title;
+        des         = inputs.des;
+        text        = inputs.text;
+        thumb       = inputs.thumb;
+        demo_file   = inputs.demo_file;
+        main_file   = inputs.main_file;
+        var slug = title;
+        slug = slug.replace(/ /g,'-');
+        slug = slug.replace('(','-');
+        slug = slug.replace(')','-');
+        slug = slug.replace('(','-');
+        slug = slug.replace(')','-');
+        slug = slug.replace(/--/g,'-');
+        now = new Date();
+        var created_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        var newF = {
+            text           : text,
+            title          : title,
+            slug           : slug,
+            des            : des,
+            main_file      : main_file,
+            demo_file      : demo_file,
+            thumb          : thumb,
+            created_at     : created_at,
+            updated_at     : created_at
+        };
+
+        Models.Video.create(newF)
+            .then(function (Fnew) {
+
+
+                res.json({status:true});return;
+
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.json({status:false});return;
+            });
+
+    },
+    vArtList:function (req,res) {
+
+            Models.Video.findAll({
+                order:[
+                    ['id','DESC']
+                ]
+            }).then(function (arts) {
+                user = req.session.user;
+                res.render('panel/vArt/list',{arts:arts,user:user});
+            })
+
+
+    },
+    vArtChangeStatus:function (req,res) {
+        inputs = prInj.PrAll(req.body);
+        Models.Video.update({
+                status:inputs.status
+            },
+            {
+                where:{id:inputs.id}
+            }
+        ).then(function () {
+            console.log('done');
+            res.json('done');
+        }).catch(function (err) {
+            console.log(err);
+            res.json('error');
+        })
+    },
+    vArtEdit:function (req,res) {
+        inputs = prInj.PrAll(req.params);
+        Models.Video.findByPk(inputs.id)
+            .then(function (v) {
+                user = req.session.user;
+                res.render('panel/sliders/edit',{v:v,user:user});
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.render('errors/500');
+            })
+    },
+    vArtUpdate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+        title       = inputs.title;
+        des         = inputs.des;
+        text        = inputs.text;
+        thumb       = inputs.thumb;
+        demo_file   = inputs.demo_file;
+        main_file   = inputs.main_file;
+
+
+        now = new Date();
+        var updated_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+
+        var UpdateC = {
+            text           : text,
+            title          : title,
+            des            : des,
+            main_file      : main_file,
+            demo_file      : demo_file,
+            thumb          : thumb,
+            updated_at     : updated_at,
+        };
+        var where = {
+            where:{id:inputs.id}
+        };
+        Models.Video.update(UpdateC,
+            where)
+            .then(function (rowsUpdated) {
+                res.json({status:true});return;
+            }).catch(function (err) {
+            console.log(err);
+            res.json({status:false});return;
+        })
+
+
+
+    },
+
+
+    slidersNew:function (req,res) {
+
+        user = req.session.user;
+        res.render('panel/sliders/add',{user:user});
+
+    },
+    slidersCreate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+
+        title       = inputs.title;
+        des         = inputs.des;
+        image_url   = inputs.thumb;
+        link        = inputs.link;
+        now = new Date();
+        var created_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        var newF = {
+            image_url      : image_url,
+            title          : title,
+            des            : des,
+            link           : link,
+            created_at     : created_at,
+            updated_at     : created_at
+        };
+
+        Models.Slider.create(newF)
+            .then(function (Fnew) {
+
+
+                res.json({status:true});return;
+
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.json({status:false});return;
+            });
+
+    },
+    slidersList:function (req,res) {
+
+        Models.Slider.findAll({
+            order:[
+                ['id','DESC']
+            ]
+        }).then(function (arts) {
+            user = req.session.user;
+            res.render('panel/sliders/list',{arts:arts,user:user});
+        })
+
+
+    },
+    slidersChangeStatus:function (req,res) {
+        inputs = prInj.PrAll(req.body);
+        Models.Slider.update({
+                status:inputs.status
+            },
+            {
+                where:{id:inputs.id}
+            }
+        ).then(function () {
+            console.log('done');
+            res.json('done');
+        }).catch(function (err) {
+            console.log(err);
+            res.json('error');
+        })
+    },
+    slidersEdit:function (req,res) {
+        inputs = prInj.PrAll(req.params);
+        Models.Slider.findByPk(inputs.id)
+            .then(function (v) {
+                user = req.session.user;
+                res.render('panel/sliders/edit',{v:v,user:user});
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.render('errors/500');
+            })
+    },
+    slidersUpdate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+        title       = inputs.title;
+        des         = inputs.des;
+        image_url   = inputs.thumb;
+        link        = inputs.link;
+
+
+        now = new Date();
+        var updated_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+
+        var UpdateC = {
+            image_url      : image_url,
+            title          : title,
+            des            : des,
+            link           : link,
+            updated_at     : updated_at,
+        };
+        var where = {
+            where:{id:inputs.id}
+        };
+        Models.Slider.update(UpdateC,
+            where)
+            .then(function (rowsUpdated) {
+                res.json({status:true});return;
+            }).catch(function (err) {
+            console.log(err);
+            res.json({status:false});return;
+        })
+
+
+
+    },
+
+
 
 
 

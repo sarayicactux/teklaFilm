@@ -56,27 +56,20 @@ module.exports = {
             page = parseInt(prInj.PrInj(page));
 
         }
-        Models.Adv.findAll({where:{status: 1,dis_status   : 1}}).then(function (allAdv) {
-            Models.Adv.findAll({
+        Models.Video.findAll({where:{status: 1}}).then(function (allVideo) {
+            Models.Video.findAll({
                 where:{
                     status: 1,
-                    dis_status   : 1
                 },
                 order:[
                     ['id','desc']
                 ],
-                include:[
-                    Models.BusinessGr,
-                    Models.AdvImage,
-                    Models.People,
-                    Models.Comment
-                ],
                 offset:(page-1)*10,
                 limit:10
-            }).then(function (bAdvs) {
-                advCnt = allAdv.length;
+            }).then(function (videos) {
+                advCnt = allVideo.length;
                 refU = host;
-                res.render('site/index',{refU:refU,page:page,advCnt:advCnt,bAdvs:bAdvs,res:res,jDate:jDate,needFul:needFul});
+                res.render('site/index',{refU:refU,page:page,advCnt:advCnt,videos:videos,res:res,needFul:needFul});
 
             })
         });
@@ -85,14 +78,14 @@ module.exports = {
     checkLogin:function(req,res){
         var pass     = prInj.PrInj(req.body.password);
         var mobile   = prInj.PrInj(req.body.mobile);
-        Models.People.findOne({
+        Models.user.findOne({
             where:{mobile:mobile}
         }).then(function (row) {
             if (row.length != 0){
 
                 if (Password.verify(pass, row.password)){
 
-                    req.session.people = row;
+                    req.session.user = row;
                    res.json({status:true});return;
 
 
@@ -112,18 +105,18 @@ module.exports = {
             })
     },
     register:function(req,res){
-        if (!req.session.people){
+        if (!req.session.user){
 
             now = new Date();
             req.session.regRq = Password.hash(now+'k');
-            res.render('site/people/register',{res:res,jDate:jDate,needFul:needFul});
+            res.render('site/user/register',{res:res,jDate:jDate,needFul:needFul});
         }
         else {
             res.render('site/ads/chooseType',{res:res,jDate:jDate,needFul:needFul});
         }
 
     },
-    registerPeople:function(req,res){
+    registeruser:function(req,res){
         var code        = prInj.PrInj(req.body.rCode);
         if (!req.session.regRq){
             res.json( {status: false});return;
@@ -141,7 +134,7 @@ module.exports = {
             slug = slug.replace(/--/g,'-');
             now = new Date();
             var created_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
-            newPeople = {
+            newuser = {
                 name           : form.name,
                 family         : form.family,
                 mobile         : form.mobile,
@@ -150,7 +143,7 @@ module.exports = {
                 created_at     : created_at,
                 updated_at     : created_at,
             }
-            Models.People.create(newPeople).then(function (newP) {
+            Models.user.create(newuser).then(function (newP) {
                 res.json( {status: true});return;
             }).catch(function () {
                 res.json( {status: false});return;
@@ -158,75 +151,7 @@ module.exports = {
             req.session.destroy();
         }
     },
-    siteUploadImage:function(req,res){
-        var tmp_path = req.file.path;
-        var advType  = req.body.advType;
-        /** The original name of the uploaded file
-         stored in the variable "originalname". **/
 
-        checkMime = needFul.checkMime(req.file.originalname,1);
-        if (checkMime){
-            var rand = rn(options);
-            var userFile    = 'panel/'+advType+'/' + rand + req.file.originalname;
-            var target_path = appRoot + '/public/panel/'+advType+'/' + rand + req.file.originalname;
-            /** A better way to copy the uploaded file. **/
-            var src = fs.createReadStream(tmp_path);
-            var dest = fs.createWriteStream(target_path);
-            src.pipe(dest);
-            src.on('end', function() {
-                fs.unlinkSync(tmp_path);
-                res.json(userFile);return;
-            });
-        }
-        else {
-            res.json('false');return;
-        }
-
-    },
-    siteUploadVideo:function(req,res){
-        var tmp_path = req.file.path;
-        var advType  = req.body.advType;
-        /** The original name of the uploaded file
-         stored in the variable "originalname". **/
-
-        checkMime = needFul.checkMime(req.file.originalname,2);
-
-        if (checkMime){
-            var rand = rn(options);
-            var userFile    = 'panel/'+advType+'/' + rand + req.file.originalname;
-            var target_path = appRoot + '/public/panel/'+advType+'/' + rand + req.file.originalname;
-            /** A better way to copy the uploaded file. **/
-            var src = fs.createReadStream(tmp_path);
-            var dest = fs.createWriteStream(target_path);
-
-            var stats = fs.statSync(tmp_path);
-            var fileSize = Math.round(stats["size"]/1024/1024);
-            if (fileSize > 10){
-
-                res.json('false');return;
-            }
-            src.pipe(dest);
-            src.on('end', function() {
-                fs.unlinkSync(tmp_path);
-                res.json(userFile);return;
-            });
-        }
-        else {
-            res.json('false');return;
-        }
-
-    },
-    siteUpdeleteUploaded:function (req,res) {
-        var file    = req.body.fileName;
-        var inputId = req.body.inputId;
-        fs.unlinkSync(appRoot + '/public/'+file);
-        res.send('<input id="'+inputId+'Path"  type="hidden" value="">');
-    },
-    siteDeleteUploaded:function (req,res) {
-        var file    = req.body.fileName;
-        fs.unlinkSync(appRoot + '/public/'+file);
-        res.json('');return;
-    },
 
     uploading:function(req,res){
         var tmp_path = req.file.path;
@@ -269,8 +194,8 @@ module.exports = {
         res.send('<input id="'+inputId+'Path"  type="hidden" value="">');
     },
     login:function(req,res){
-        if (!req.session.people){
-            res.render('site/people/login',{
+        if (!req.session.user){
+            res.render('site/user/login',{
                 error: '',
                 res:res,
                 jDate:jDate,

@@ -33,9 +33,7 @@ des:"TeklaFilm::ControlPanel" ,
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Create new <%-type%> article
-
-                                </h2>
+                                <h2>Edit : <%- v.title %></h2>
 
                                 <div class="clearfix"></div>
                             </div>
@@ -45,7 +43,16 @@ des:"TeklaFilm::ControlPanel" ,
                                     <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label>title<span class="required">*</span></label>
-                                            <input type="text" name="title" id="title"  class="form-control " >
+                                            <input value="<%- v.title %>" type="text" name="title" id="title"  class="form-control" >
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>description<span class="required">*</span></label>
+                                            <textarea name="des" id="des"  class="form-control"><%- v.des %></textarea>
                                         </div>
 
 
@@ -53,8 +60,8 @@ des:"TeklaFilm::ControlPanel" ,
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 form-group">
-                                            <label>description<span class="required">*</span></label>
-                                            <textarea id="text" rows="15"  class="form-control"></textarea>
+                                            <label>text<span class="required">*</span></label>
+                                            <textarea id="text" rows="15"  class="form-control"><%- v.text %></textarea>
 
 
                                         </div>
@@ -83,7 +90,15 @@ des:"TeklaFilm::ControlPanel" ,
 
 
                                 <span id="tagimage">
-<input id="imagePath" value="" type="hidden" class="form-control">
+<input id="imagePath" value="<%- v.thumb %>" type="hidden" class="form-control">
+                                    <a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.thumb %>','image');" class="btn btn-danger" title="delete"  >
+    <i  class="fa fa-recycle"></i>
+</a>
+<br>
+
+<a href="/<%- v.thumb %>" target="_blank" >
+    <img height="90px" width="90px" src="/<%- v.thumb %>" class="user-image">
+</a>
 </span>
 
 
@@ -97,12 +112,12 @@ des:"TeklaFilm::ControlPanel" ,
 
                                         <div class="col-md-4 form-group">
 
-                                            <label   style="padding:2px"><%-type%></label>
+                                            <label   style="padding:2px">Demo</label>
 
 
 
-                                            <label for="upFile" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose <%-type%></strong></label>
-                                            <input type="file" name="upFile"  onchange="uploadFile('upFile','3')" id="upFile"  class="inputfile" data-multiple-caption="{count} files selected" multiple />
+                                            <label for="demo" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>
+                                            <input type="file" name="demo"  onchange="uploadFile('demo','3')" id="demo"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />
 
                                         </div>
 
@@ -112,8 +127,55 @@ des:"TeklaFilm::ControlPanel" ,
                                         <div class="col-md-8 form-group">
 
 
-                                <span id="tagupFile">
-<input id="upFilePath" value="" type="hidden" class="form-control">
+                                <span id="tagdemo">
+<input id="demoPath" value="<%- v.demo_file %>" type="hidden" class="form-control">
+                                    The file was loaded successfully, to view it
+<a href="<%- host +'/'+ v.demo_file %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
+    <i  class="fa fa-eye-slash"></i>
+</a>
+, for delete
+<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.demo_file %>','demo');" class="btn btn-danger btn-sm" title="delete"  >
+    <i  class="fa fa-recycle"></i>
+</a>
+</span>
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+
+                                        <div class="col-md-4 form-group">
+
+                                            <label   style="padding:2px">main video</label>
+
+
+
+                                            <label for="main" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>
+                                            <input type="file" name="main"  onchange="uploadFile('main','2')" id="main"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 form-group">
+
+
+                                <span id="tagmain">
+<input id="mainPath" value="<%- v.main_file%>" type="hidden" class="form-control">
+
+The file was loaded successfully, to view it
+<a href="<%- host +'/'+ v.main_file %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
+    <i  class="fa fa-eye-slash"></i>
+</a>
+, for delete
+<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.main_file %>','main');" class="btn btn-danger btn-sm" title="delete"  >
+    <i  class="fa fa-recycle"></i>
+</a>
 </span>
 
 
@@ -126,7 +188,7 @@ des:"TeklaFilm::ControlPanel" ,
                                         <div class="col-md-2  form-group">
                                             <label >&nbsp;</label>
 
-                                            <button data-pid="q" type="button" id="sendArticle" class="form-control btn btn-success">Send</button>
+                                            <button data-pid="q" type="button" id="sendVideo" class="form-control btn btn-success">Send</button>
 
                                         </div>
                                     </div>
@@ -204,27 +266,32 @@ des:"TeklaFilm::ControlPanel" ,
 
 
     })
-    $('#sendArticle').click(function () {
-        $('#sendArticle').prop('disabled', true);
-        des  = tinyMCE.editors[$('#text').attr('id')].getContent();
-        title = $('#title').val();
-        thumb        = $('#imagePath').val();
-        file_url     = $('#upFilePath').val();
-        if (   des == ''   || title == '' ||  thumb == '' ||  file_url == '' ){
+    $('#sendVideo').click(function () {
+        $('#sendVideo').prop('disabled', true);
+        text        = tinyMCE.editors[$('#text').attr('id')].getContent();
+        des         = $('#des').val();
+        title       = $('#title').val();
+        thumb       = $('#imagePath').val();
+        demo_file   = $('#demoPath').val();
+        main_file   = $('#mainPath').val();
+        if (   des == ''   || title == '' ||  text == '' ||  main_file == '' ||  thumb == '' ||  demo_file == '' ){
 
             $('#alertmsg').html('Please fill all fields');
-            $('#sendArticle').prop('disabled', false);
+            $('#sendVideo').prop('disabled', false);
             return false;
         }
         else {
             $.ajax({
-                url: 'create/<%-intType%>',
+                url: 'update',
                 data: {
+                    text       : text,
                     des        : des,
                     title      : title,
                     thumb      : thumb,
-                    file_url   : file_url,
-                                 },
+                    demo_file  : demo_file,
+                    main_file  : main_file,
+                    id         : '<%- v.id %>',
+                },
                 method: 'POST',
                 success :function(data){
 
@@ -239,7 +306,7 @@ des:"TeklaFilm::ControlPanel" ,
                             styling: 'bootstrap3'
                         });
                         setTimeout(function () {
-                            window.location = "../list/<%-intType%>";
+                            window.location = "../list";
                         }, 1000);
                         $('html, body').animate({ scrollTop: 0 }, 'slow');
 
@@ -255,6 +322,7 @@ des:"TeklaFilm::ControlPanel" ,
 
 
     tinymce.init({ selector:'#text',
+        directionality : "ltr",
         language: 'en',
         theme: 'modern',
         plugins: [
@@ -277,7 +345,6 @@ des:"TeklaFilm::ControlPanel" ,
         images_upload_url: '/upload',
         relative_urls : false,
         remove_script_host : false,
-        directionality : "ltr",
         document_base_url : "https://teklafilm.com/"
     });
 

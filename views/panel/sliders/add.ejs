@@ -33,7 +33,7 @@ des:"TeklaFilm::ControlPanel" ,
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Create new <%-type%> article
+                                <h2>Create new Slider
 
                                 </h2>
 
@@ -45,18 +45,25 @@ des:"TeklaFilm::ControlPanel" ,
                                     <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label>title<span class="required">*</span></label>
-                                            <input type="text" name="title" id="title"  class="form-control " >
+                                            <input type="text" name="title" id="title"  class="form-control" >
                                         </div>
 
 
 
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>description<span class="required">*</span></label>
-                                            <textarea id="text" rows="15"  class="form-control"></textarea>
+                                            <textarea name="des" id="des"  class="form-control"></textarea>
+                                        </div>
 
 
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>link<span class="required">*</span></label>
+                                            <input type="text" name="link" id="link"  class="form-control" >
                                         </div>
 
 
@@ -72,7 +79,7 @@ des:"TeklaFilm::ControlPanel" ,
 
 
                                             <label for="image" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose image</strong></label>
-                                            <input type="file" name="image"  onchange="uploadFile('image','4')" id="image" accept=".jpeg,.jpg,.png" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+                                            <input type="file" name="image"  onchange="uploadFile('image','4')" id="image" accept=".jpeg,.jpg,.png,.gif" class="inputfile" data-multiple-caption="{count} files selected" multiple />
 
                                         </div>
 
@@ -91,42 +98,13 @@ des:"TeklaFilm::ControlPanel" ,
 
                                         </div>
                                     </div>
-
-                                    <div class="row">
-
-
-                                        <div class="col-md-4 form-group">
-
-                                            <label   style="padding:2px"><%-type%></label>
-
-
-
-                                            <label for="upFile" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose <%-type%></strong></label>
-                                            <input type="file" name="upFile"  onchange="uploadFile('upFile','3')" id="upFile"  class="inputfile" data-multiple-caption="{count} files selected" multiple />
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8 form-group">
-
-
-                                <span id="tagupFile">
-<input id="upFilePath" value="" type="hidden" class="form-control">
-</span>
-
-
-
-
-                                        </div>
-                                    </div>
+                                    
 
                                     <div class="row">
                                         <div class="col-md-2  form-group">
                                             <label >&nbsp;</label>
 
-                                            <button data-pid="q" type="button" id="sendArticle" class="form-control btn btn-success">Send</button>
+                                            <button data-pid="q" type="button" id="sendSlider" class="form-control btn btn-success">Send</button>
 
                                         </div>
                                     </div>
@@ -204,26 +182,26 @@ des:"TeklaFilm::ControlPanel" ,
 
 
     })
-    $('#sendArticle').click(function () {
-        $('#sendArticle').prop('disabled', true);
-        des  = tinyMCE.editors[$('#text').attr('id')].getContent();
-        title = $('#title').val();
-        thumb        = $('#imagePath').val();
-        file_url     = $('#upFilePath').val();
-        if (   des == ''   || title == '' ||  thumb == '' ||  file_url == '' ){
+    $('#sendSlider').click(function () {
+        $('#sendSlider').prop('disabled', true);
+        des         = $('#des').val();
+        title       = $('#title').val();
+        thumb       = $('#imagePath').val();
+        link        = $('#link').val();
+        if (   des == ''   || title == ''  ||  thumb == '' ||  link == '' ){
 
             $('#alertmsg').html('Please fill all fields');
-            $('#sendArticle').prop('disabled', false);
+            $('#sendSlider').prop('disabled', false);
             return false;
         }
         else {
             $.ajax({
-                url: 'create/<%-intType%>',
+                url: 'create',
                 data: {
+                    link       : link,
                     des        : des,
                     title      : title,
                     thumb      : thumb,
-                    file_url   : file_url,
                                  },
                 method: 'POST',
                 success :function(data){
@@ -239,7 +217,7 @@ des:"TeklaFilm::ControlPanel" ,
                             styling: 'bootstrap3'
                         });
                         setTimeout(function () {
-                            window.location = "../list/<%-intType%>";
+                            window.location = "list";
                         }, 1000);
                         $('html, body').animate({ scrollTop: 0 }, 'slow');
 
@@ -251,34 +229,6 @@ des:"TeklaFilm::ControlPanel" ,
 
                 }});
         }
-    });
-
-
-    tinymce.init({ selector:'#text',
-        language: 'en',
-        theme: 'modern',
-        plugins: [
-            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen',
-            'insertdatetime media nonbreaking save table contextmenu directionality',
-            'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-        ],
-        toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons | codesample',
-        image_advtab: true,
-        templates: [
-            { title: 'Test template 1', content: 'Test 1' },
-            { title: 'Test template 2', content: 'Test 2' }
-        ],
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css',
-            'admin/build/css/tiny.css'
-        ],
-        images_upload_url: '/upload',
-        relative_urls : false,
-        remove_script_host : false,
-        directionality : "ltr",
-        document_base_url : "https://teklafilm.com/"
     });
 
 </script>

@@ -2,7 +2,6 @@ const path          = require('path');
 const url           = require('url');
 const date          = require('date-and-time');
 const Password      = require("node-php-password");
-const speakeasy     = require('speakeasy');
 var prInj = require('../helpers/prInj');
 var jDate = require('../helpers/jDate');
 var Models = require('../models/Models');
@@ -30,7 +29,7 @@ module.exports = {
     },
     checkLogin: function (req,res) {
 
-        var pass        = prInj.PrInj(req.body.password);
+        var pass     = prInj.PrInj(req.body.password);
         var email    = prInj.PrInj(req.body.email);
         Models.User.findOne({
             where:{email:email}

@@ -33,9 +33,7 @@ des:"TeklaFilm::ControlPanel" ,
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Edit : <%- v.title %>
-
-                                </h2>
+                                <h2>Edit : <%- v.title %></h2>
 
                                 <div class="clearfix"></div>
                             </div>
@@ -45,7 +43,7 @@ des:"TeklaFilm::ControlPanel" ,
                                     <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label>title<span class="required">*</span></label>
-                                            <input value="<%- v.title %>" type="text" name="title" id="title"  class="form-control persian" >
+                                            <input value="<%- v.title %>" type="text" name="title" id="title"  class="form-control " >
                                         </div>
 
 
@@ -297,7 +295,8 @@ The file was loaded successfully, to view it
         images_upload_url: '/upload',
         relative_urls : false,
         remove_script_host : false,
-        document_base_url : "https://ehghagh.com/"
+        directionality : "ltr",
+        document_base_url : "https://teklafilm.com/"
     });
 
 </script>
