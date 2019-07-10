@@ -18,9 +18,9 @@ var home            = require('../controllers/home');
 
 router.route('/').get(preInf,home.index);
 router.route('/sitemap.xml').get(sitemap,home.sitemap);
+router.route('/singIn').get(preInf,home.singIn);
 router.route('/login').post(home.checkLogin);
 router.route('/logOut').get(home.logOut);
-router.route('/register').get(preInf,home.register);
 router.route('/register').post(preInf,home.registeruser);
 
 

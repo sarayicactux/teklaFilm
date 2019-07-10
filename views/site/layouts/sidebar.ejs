@@ -1,40 +1,317 @@
-<div class="row  make-me-sticky2 ">
-    <div class="col-md-12 shadow-sm border  bg-white text-dark">
-        <div class="p-2 row p-0">
-            <div class="col-12 m-0 p-0">
-                <h2  class="boxesWline linkColor">آگهی های خودرو </h2>
-            </div>
-        </div>
-        <div class="row  mt-1">
-            <div class="col-md-12 ">
-                <%
-                carAdv = res.lastCarAdv;
-                for (i=0;i<carAdv.length; i++){
-                imageA = carAdv[i].CarAdvImages[0];
-                %>
-                <a class="custom-link" href="<%- host+"/cd/"+carAdv[i].id%>">
-                    <div class="row">
+<div class="row  make-me-sticky">
+    <div class="col-12 bg-white content-cl shadow-sm border p-1">
+        <div class="col-12 p-0">
+            <div class="row mb-3">
+                <div class="col-5">
+                    <div class=" p-2 bg-dark text-white">Free Pdf</div>
+                </div>
+                <div class="col-7">
+                    <div class=" p-2 text-dark">
+                        <div align="right">
+                            <a class="custum-link showAll" href="#">Show All</a>
 
-                        <div class="col-6">
-                            <span class="carSideBarsType"><%if (carAdv[i].selling_type == 2){%>فروش اقساطی<% } else { %>فروش نقدی<% } %></span><br>
-                            <span class="carSideBarTitle"> <%- carAdv[i].title %>   </span><br>
-                            <span class="carSideBarCity"><%- carAdv[i].pro_name %></span><br>
-                            <span class="carSideBarTime"><%- jDate.jDate( carAdv[i].actived_at) %></span>
                         </div>
-                        <div class="col-6">
-                            <img class="sideBarImage" src="<%- host + '/' +imageA.img_url %>">
-                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
 
                     </div>
-                </a>
-                    <hr>
-                <% } %>
+                    <div class="col-11 p-0 text-dark">
 
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+
+                    </div>
+                </div>
 
             </div>
 
 
         </div>
+    </div>
+    <div class="col-12 bg-white content-cl shadow-sm border p-1 mt-2">
+        <div class="col-12 p-0">
+            <div class="row mb-3">
+                <div class="col-5">
+                    <div class=" p-2 bg-dark text-white">Free Powerpoint</div>
+                </div>
+                <div class="col-7">
+                    <div class=" p-2 text-dark">
+                        <div align="right">
+                            <a class="custum-link showAll" href="#">Show All</a>
 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-12 bg-white content-cl shadow-sm border p-1 mt-2">
+        <div class="col-12 p-0">
+            <div class="row mb-3">
+                <div class="col-5">
+                    <div class=" p-2 bg-dark text-white">Free CheetSheet</div>
+                </div>
+                <div class="col-7">
+                    <div class=" p-2 text-dark">
+                        <div align="right">
+                            <a class="custum-link showAll" href="#">Show All</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 border-bottom  sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 sideBarLink">
+                <div class="row">
+                    <div class="col-1 p-0 " >
+                        <span class="linkT">&blacksquare;</span>
+
+                    </div>
+                    <div class="col-11 p-0 text-dark">
+
+                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
     </div>
 </div>

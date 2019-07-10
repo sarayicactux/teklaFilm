@@ -46,6 +46,19 @@ module.exports = {
             res.send( xml );
         });
     },
+    singIn:function(req,res){
+        if (!req.session.user){
+            res.render('site/user/login',{
+                error: '',
+                res:res,
+                jDate:jDate,
+                needFul:needFul
+            });
+        }
+        else {
+            res.render('site/ads/chooseType',{res:res,jDate:jDate,needFul:needFul});
+        }
+    },
     index: function (req,res) {
         page = 1;
         if (req.query.page){
@@ -103,18 +116,6 @@ module.exports = {
                 res.json({status:false});
                 return;
             })
-    },
-    register:function(req,res){
-        if (!req.session.user){
-
-            now = new Date();
-            req.session.regRq = Password.hash(now+'k');
-            res.render('site/user/register',{res:res,jDate:jDate,needFul:needFul});
-        }
-        else {
-            res.render('site/ads/chooseType',{res:res,jDate:jDate,needFul:needFul});
-        }
-
     },
     registeruser:function(req,res){
         var code        = prInj.PrInj(req.body.rCode);
@@ -192,19 +193,6 @@ module.exports = {
         var inputId = req.body.inputId;
         fs.unlinkSync(appRoot + '/public/'+file);
         res.send('<input id="'+inputId+'Path"  type="hidden" value="">');
-    },
-    login:function(req,res){
-        if (!req.session.user){
-            res.render('site/user/login',{
-                error: '',
-                res:res,
-                jDate:jDate,
-                needFul:needFul
-            });
-        }
-        else {
-            res.render('site/ads/chooseType',{res:res,jDate:jDate,needFul:needFul});
-        }
     },
     logOut:function(req,res){
         req.session.destroy();
