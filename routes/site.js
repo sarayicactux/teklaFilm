@@ -22,7 +22,8 @@ router.route('/singIn').get(preInf,home.singIn);
 router.route('/login').post(home.checkLogin);
 router.route('/logOut').get(home.logOut);
 router.route('/register').post(preInf,home.registeruser);
-
+router.route('/activeAcc/:str').get(preInf,home.activeAcc);
+router.route('/forgetpass').post(preInf,home.forgetpass);
 
 router.route('/uploading').post(type,home.uploading);
 router.route('/deleteUploaded').post(home.deleteUploaded);

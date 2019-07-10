@@ -38,7 +38,13 @@ pageUrl:"https://teklafilm.com"
                                 <div class="row">
                                     <div class="col-md-3 col-0"></div>
                                     <div class="col-12 col-md-6">
-                                        <form method="post" action="login">
+                                        <% if (error.length >2){%>
+                                                <div class="col-12 bg-danger text-white p-2 mb-3"><%- error%></div>
+                                            <%}%>
+                                            <% if (msg.length >2){%>
+                                                <div class="col-12 bg-primary text-white p-2 mb-3"><%- msg%></div>
+                                            <%}%>
+                                        <form method="post" action="<%-host%>/login">
                                         <div class="row">
                                             <div class="col-md-12 form-group">
                                                 <label>Email</label>
@@ -67,7 +73,7 @@ pageUrl:"https://teklafilm.com"
                                 <div class="row">
                                     <div class="col-md-3 col-0"></div>
                                     <div class="col-12 col-md-6">
-                                        <form method="post" action="register">
+                                        <form method="post" action="<%-host%>/register">
                                             <div class="row">
                                                 <div class="col-md-12 form-group">
                                                     <label>First Name</label>
@@ -109,7 +115,7 @@ pageUrl:"https://teklafilm.com"
                                 <div class="row">
                                     <div class="col-md-3 col-0"></div>
                                     <div class="col-12 col-md-6">
-                                        <form method="post" action="forgetpass">
+                                        <form method="post" action="<%-host%>/forgetpass">
 
                                             <div class="row">
                                                 <div class="col-md-12 form-group">
@@ -119,7 +125,7 @@ pageUrl:"https://teklafilm.com"
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 form-group">
-                                                    <input type="submit" value="Register"  class="form-control btn-sm btn-info " >
+                                                    <input type="submit" value="Create a new password and mail me"  class="form-control btn-sm btn-info " >
                                                 </div>
                                             </div>
                                         </form>
@@ -131,7 +137,6 @@ pageUrl:"https://teklafilm.com"
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

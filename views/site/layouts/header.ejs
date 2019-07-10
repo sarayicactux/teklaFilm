@@ -3,8 +3,15 @@
     <div class="col-6 p-0">
         <a class="navbar-brand" href="<%- host %>">Teklafiml.com</a>
     </div>
+
     <div class="col-6 p-0">
+        <% if (res.user){ %>
+            <a class="navbar-brand float-right"  href="<%- host %>/logOut">LogOut</a>
+            <a class="navbar-brand float-right"  href="<%- host %>/profile">Profile</a>
+
+    <% } else {%>
         <a class="navbar-brand float-right"  href="<%- host %>/singIn">Sign In</a>
+        <% } %>
     </div>
 
 
