@@ -96,6 +96,43 @@ module.exports = {
             res.redirect(host+'/profile')
         }
     },
+    download:function(req,res){
+
+        id = prInj.PrInj(req.params.id);
+        Models.Video.findByPk(id).then(function (v) {
+            if(res.user){
+                user_id = req.session.user.id;
+                Models.Pay.findOne({
+                    where:{
+                        user_id : user_id,
+                        video_id: id
+                    }
+                })
+                    .then(function (pay) {
+                        if(pay){
+
+                                file = 'public/'+v.main_file;
+                                res.download(file);return;
+
+
+                        }
+                        else {
+                            req.session.red = host+'/v/'+v.slug;
+                            res.redirect(host+'/pay/'+id);return;
+                        }
+
+                })
+            }
+            else {
+                req.session.red = host+'/v/'+v.slug;
+
+                res.redirect(host+'/singIn');return;
+            }
+            }).catch(function (r) {
+                res.status(500);
+                res.render('errors/500');
+        });
+    },
     index: function (req,res) {
         // https://myaccount.google.com/lesssecureapps
 
@@ -109,6 +146,9 @@ module.exports = {
 
         }
         Models.Video.findAll({where:{status: 1}}).then(function (allVideo) {
+            if (allVideo.length < (page-1)*10 ){
+                res.redirect(host);return
+            }
             Models.Video.findAll({
                 where:{
                     status: 1,
@@ -119,23 +159,59 @@ module.exports = {
                 offset:(page-1)*10,
                 limit:10
             }).then(function (videos) {
-                advCnt = allVideo.length;
+                vCnt = allVideo.length;
                 refU = host;
-                res.render('site/index',{refU:refU,page:page,advCnt:advCnt,videos:videos,res:res,needFul:needFul});
+                res.render('site/index',{refU:refU,page:page,vCnt:vCnt,videos:videos,res:res,needFul:needFul});
 
             })
         });
 
     },
+    videoDetail:function(req,res){
+        slug = prInj.PrInj(req.params.slug);
+        Models.Video.findOne({
+            where: {
+                slug :slug
+            }
+        }).then(function (v) {
+            if(v){
+                res.render('site/pages/video',{v:v,res:res,needFul:needFul});
+            }
+            else {
+                    res.status(404);
+                    res.render('errors/404');
+            }
+        })
+    },
+    freeDetail:function(req,res){
+        slug = prInj.PrInj(req.params.slug);
+        Models.FreeArticle.findOne({
+            where: {
+                slug :slug
+            }
+        }).then(function (v) {
+            if(v){
+                res.render('site/pages/free',{v:v,res:res,needFul:needFul});
+            }
+            else {
+                    res.status(404);
+                    res.render('errors/404');
+            }
+        })
+    },
+    freeList:function(req,res){
+
+    },
     checkLogin:function(req,res){
+
         var pass     = prInj.PrInj(req.body.password);
         var email   = prInj.PrInj(req.body.email);
         Models.User.findOne({
-            where:{email:email}
+            where:{email:email},
         }).then(function (row) {
             if (row.length != 0){
-
                 if (Password.verify(pass, row.password)){
+
                     if (row.status == 0){
                         res.render('site/user/login',{
                             error: 'Your account is not verified, check your email.',
@@ -145,8 +221,16 @@ module.exports = {
                         });
                     }
                     else {
+
                         req.session.user = row;
-                        res.redirect(host + '/profile');return;
+
+                        if (req.session.red){
+                            res.redirect(req.session.red);return;
+                        }
+                        else {
+                            res.redirect(host + '/profile');return;
+                        }
+
                     }
 
 

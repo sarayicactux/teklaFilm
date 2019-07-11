@@ -22,8 +22,14 @@ router.route('/singIn').get(preInf,home.singIn);
 router.route('/login').post(home.checkLogin);
 router.route('/logOut').get(home.logOut);
 router.route('/register').post(preInf,home.registeruser);
+router.route('/v/:slug').get(preInf,home.videoDetail);
+router.route('/free/:slug').get(preInf,home.freeDetail);
+router.route('/f/:type').get(preInf,home.freeList);
+router.route('/download/:id').get(preInf,home.download);
 router.route('/activeAcc/:str').get(preInf,home.activeAcc);
 router.route('/forgetpass').post(preInf,home.forgetpass);
+
+
 
 router.route('/uploading').post(type,home.uploading);
 router.route('/deleteUploaded').post(home.deleteUploaded);
@@ -64,7 +70,7 @@ function preInf(req,res,next) {
             offset:0,
             limit:10
         }).then(function (powers) {
-            res.cheet = powers;
+            res.powers = powers;
             Models.FreeArticle.findAll({
                 where:{
                     status: 1,

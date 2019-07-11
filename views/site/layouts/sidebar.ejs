@@ -8,15 +8,19 @@
                 <div class="col-7">
                     <div class=" p-2 text-dark">
                         <div align="right">
-                            <a class="custum-link showAll" href="#">Show All</a>
+                            <a class="custum-link showAll" href="<%-host%>/f/1">Show All</a>
 
                         </div>
                     </div>
 
                 </div>
             </div>
-
-            <div class="col-12 border-bottom  sideBarLink">
+            <%
+            pdfs = res.pdfs;
+            for (i=0;i<pdfs.length;i++){
+                post = pdfs[i];
+            %>
+            <div class="col-12 <% if(i+1 !=  pdfs.length){%> border-bottom <% }%> sideBarLink">
                 <div class="row">
                     <div class="col-1 p-0 " >
                         <span class="linkT">&blacksquare;</span>
@@ -24,82 +28,13 @@
                     </div>
                     <div class="col-11 p-0 text-dark">
 
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
+                        <a href="<%- host+'/free/'+post.slug%>" class="custum-link showAll" ><%- post.title %></a>
 
                     </div>
                 </div>
 
             </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Pdf no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
+            <% }%>
 
 
         </div>
@@ -113,7 +48,7 @@
                 <div class="col-7">
                     <div class=" p-2 text-dark">
                         <div align="right">
-                            <a class="custum-link showAll" href="#">Show All</a>
+                            <a class="custum-link showAll" href="<%-host%>/f/2">Show All</a>
 
                         </div>
                     </div>
@@ -121,7 +56,12 @@
                 </div>
             </div>
 
-            <div class="col-12 border-bottom  sideBarLink">
+            <%
+            powers = res.powers;
+            for (i=0;i<powers.length;i++){
+                post = powers[i];
+            %>
+            <div class="col-12 <% if(i+1 !=  powers.length){%> border-bottom <% }%> sideBarLink">
                 <div class="row">
                     <div class="col-1 p-0 " >
                         <span class="linkT">&blacksquare;</span>
@@ -129,82 +69,13 @@
                     </div>
                     <div class="col-11 p-0 text-dark">
 
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
+                        <a href="<%- host+'/free/'+post.slug%>" class="custum-link showAll" ><%- post.title %></a>
 
                     </div>
                 </div>
 
             </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is Powerpoint no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
+            <% }%>
 
 
         </div>
@@ -218,7 +89,7 @@
                 <div class="col-7">
                     <div class=" p-2 text-dark">
                         <div align="right">
-                            <a class="custum-link showAll" href="#">Show All</a>
+                            <a class="custum-link showAll" href="<%-host%>/f/3">Show All</a>
 
                         </div>
                     </div>
@@ -226,7 +97,12 @@
                 </div>
             </div>
 
-            <div class="col-12 border-bottom  sideBarLink">
+            <%
+            cheet = res.cheet;
+            for (i=0;i<cheet.length;i++){
+                post = cheet[i];
+            %>
+            <div class="col-12 <% if(i+1 !=  cheet.length){%> border-bottom <% }%> sideBarLink">
                 <div class="row">
                     <div class="col-1 p-0 " >
                         <span class="linkT">&blacksquare;</span>
@@ -234,82 +110,13 @@
                     </div>
                     <div class="col-11 p-0 text-dark">
 
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
+                        <a href="<%- host+'/free/'+post.slug%>" class="custum-link showAll" ><%- post.title %></a>
 
                     </div>
                 </div>
 
             </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 border-bottom  sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-12 sideBarLink">
-                <div class="row">
-                    <div class="col-1 p-0 " >
-                        <span class="linkT">&blacksquare;</span>
-
-                    </div>
-                    <div class="col-11 p-0 text-dark">
-
-                        <a href="#" class="custum-link showAll" >This is CheetSheet no 1</a>
-
-                    </div>
-                </div>
-
-            </div>
+            <% }%>
 
 
         </div>

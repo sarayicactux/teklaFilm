@@ -3,7 +3,7 @@ const   Sequelize = require('sequelize');
 
 const Pay = sequelize.define('Pay', {
         user_id: Sequelize.INTEGER,
-        article_id: Sequelize.INTEGER,
+        video_id: Sequelize.INTEGER,
         amount: Sequelize.INTEGER,
         t_code: Sequelize.STRING,
         date_time: Sequelize.STRING,

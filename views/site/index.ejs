@@ -68,22 +68,65 @@ pageUrl:"https://teklafilm.com"
                         %>
                         <div class="row">
                             <div class="col-3">
-                                <a href="<%- host+'/'+v.slug %>" class="custum-link">
+                                <a href="<%- host+'/v/'+v.slug %>" class="custum-link">
                                     <img src="<%- host+'/'+v.thumb %>" class="thumbs">
                                 </a>
                             </div>
                             <div class="col-9">
-                                <a class="custum-link vTitle" href="<%- host+'/'+v.slug %>"><%- v.title %></a>
+                                <a class="custum-link vTitle" href="<%- host+'/v/'+v.slug %>"><%- v.title %></a>
                                 <p>
                                     <%- v.des %>
                                 </p>
                             </div>
                         </div>
                         <hr>
-                        <% } %>
+                        <% }%>
 
                     </div>
+
                 </div>
+                <% if(vCnt > 10){ %>
+                    <div class="col-md-12 shadow-sm border pb-1 mt-2  bg-white text-dark">
+                        <div class="row mt-md-3 mt-2">
+                            <div class="col-12 p-0" align="center">
+
+                                <div class="pagination">
+                                    <%
+                                        next = page + 1;
+                                        pre  = page - 1;
+                                    if (page < 4 ) {
+                                        href = refU+'?page='+pre;
+                                        if (pre < 2){
+                                            href = refU;
+                                        }
+                                    %>
+                                    <a href="<%- href %>" class="pl-2 pr-2" ><svg class="navBIcon"><use xlink:href="#left"></use></svg></a>
+                                    <a href="<%- refU %>" <% if(page == 1){ %>class="active"<% } %> >1</a>
+                                    <a href="<%- refU+'?page=2' %>" <% if(vCnt< 10){%> style="display: none" <%} %> <% if(page == 2){ %>class="active"<% } %> >2</a>
+                                    <a href="<%- refU+'?page=3' %>" <% if(vCnt< 20){%> style="display: none" <%} %><% if(page == 3){ %>class="active"<% } %> >3</a>
+                                    <a href="<%- refU+'?page=4' %>" <% if(vCnt< 30){%> style="display: none" <%} %><% if(page == 4){ %>class="active"<% } %> >4</a>
+                                    <a href="<%- refU+'?page=5' %>" <% if(vCnt< 40){%> style="display: none" <%} %><% if(page == 5){ %>class="active"<% } %> >5</a>
+                                    <a href="<%- refU+'?page='+next %>" <% if(page*10 > vCnt){%> style="display: none" <%} %> class="pl-2 pr-2" ><svg class="navBIcon"><use xlink:href="#right"></use></svg></a>
+
+                                    <% }
+                                    else { %>
+                                        <a href="<%- refU+'?page='+ pre %>" class="pl-2 pr-2" ><svg class="navBIcon"><use xlink:href="#left"></use></svg></a>
+                                        <a href="<%- refU+'?page='+(page-2) %>" <% if( page-2 < 1){%> style="display: none" <%} %>  ><%- page-2 %></a>
+                                        <a href="<%- refU+'?page='+(page-1) %>" <% if( page-1 < 1){%> style="display: none" <%} %>  ><%- page-1 %></a>
+                                        <a href="<%- refU+'?page='+ page %>" class="active" ><%- page %></a>
+                                        <a href="<%- refU+'?page='+(page+1) %>" <% if(page*10 > vCnt){%> style="display: none" <%} %>  ><%- page+1 %></a>
+                                        <a href="<%- refU+'?page='+(page+2) %>" <% if((page+1)*10 > vCnt){%> style="display: none" <%} %>  ><%- page+2 %></a>
+                                        <a href="<%- refU+'?page='+next %>" <% if(page*10 > vCnt){%> style="display: none" <%} %> class="pl-2 pr-2" ><svg class="navBIcon"><use xlink:href="#right"></use></svg></a>
+                                    <% } %>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
             </div>
 
         </div>
