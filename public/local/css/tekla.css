@@ -1,0 +1,44 @@
+.navC{
+    background: #D52A33;
+}
+.sliderH{
+    height: 100%;
+    max-height: 380px;
+}
+.buyF {
+    background: #366ED8;
+    color: #ffffff;
+    font-size: 32px;
+}
+.thumbs {
+    width: 100%;
+    max-width: 100%;
+}
+.custum-link:hover {
+    text-decoration: none;
+}
+.vTitle{
+    color: #303030;
+    font-size: 20px;
+    font-weight: 500;
+}
+.vTitle:hover{
+    color: #606060;
+}
+.showAll{
+    color: #303030;
+}
+.showAll:hover{
+    color: #606060;
+}
+.linkT{
+    color:#EC6E00 ;
+    font-size: 20px;
+    font-weight: 900;
+    margin-left: 5px;
+    padding-top: 5px
+}
+.sideBarLink {
+    padding-bottom: 4px !important;
+    padding-top: 8px !important;
+}
