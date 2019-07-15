@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../layouts/head.ejs",{
+title:"teklafilm :: Free"+ ftype ,
+des:"teklafilm :: Free"+ ftype ,
+pageUrl:"https://teklafilm.com"
+}) %>
+<body   >
+
+<% include ../layouts/svg.ejs %>
+
+<%- include ../layouts/header.ejs%>
+
+
+
+<div class="container" style="margin-top:60px">
+    <div class="row">
+        <div class="col-md-8 p-1">
+            <div class="row  make-me-sticky">
+                    <div class="col-md-12 p-2 bg-dark text-white">
+                                    Free <%- ftype %>
+                    </div>
+                <div class="col-12 bg-white content-cl shadow-sm border p-1">
+                    <div class="col-12 p-1">
+                        <% for(i=0;i<freeArts.length;i++){
+                            v = freeArts[i];
+                        %>
+                        <div class="row">
+                            <div class="col-2">
+                                <a href="<%- host+'/free/'+v.slug %>" class="custum-link">
+                                    <img src="<%- host+'/'+v.thumb %>" class="thumbs">
+                                </a>
+                            </div>
+                            <div class="col-10 my-auto">
+                                <a class="custum-link vTitle" href="<%- host+'/free/'+v.slug %>"><%- v.title %></a>
+                            </div>
+                        </div>
+                        <hr>
+                        <% }%>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 p-1">
+            <%- include("../layouts/sidebar.ejs",{
+            res:res
+            }) %>
+        </div>
+    </div>
+</div>
+<%- include("../layouts/footer.ejs",{
+res:res
+}) %>
+
+
+</body>
+<%- include ../layouts/scripts.ejs%>
+
+</html>

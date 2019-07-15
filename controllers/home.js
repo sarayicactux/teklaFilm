@@ -110,6 +110,20 @@ module.exports = {
                 })
                     .then(function (pay) {
                         if(pay){
+                            Models.Video.update({
+                                downloads : v.downloads +1
+                            },{
+                                where:{
+                                    id: v.id
+                                }
+                            });
+                            Models.Pay.update({
+                                downloads : pay.downloads + 1
+                            },{
+                                where:{
+                                    id : pay.id
+                                }
+                            });
 
                                 file = 'public/'+v.main_file;
                                 res.download(file);return;
@@ -128,6 +142,29 @@ module.exports = {
 
                 res.redirect(host+'/singIn');return;
             }
+            }).catch(function (r) {
+                res.status(500);
+                res.render('errors/500');
+        });
+    },
+    downloadFree:function(req,res){
+
+        id = prInj.PrInj(req.params.id);
+        Models.FreeArticle.findByPk(id).then(function (v) {
+            
+            Models.FreeArticle.update({
+                downloads : v.downloads +1
+            },{
+                where:{
+                    id: v.id
+                }
+            });
+            
+
+                file = 'public/'+v.file_url;
+                res.download(file);return;
+            
+           
             }).catch(function (r) {
                 res.status(500);
                 res.render('errors/500');
@@ -175,6 +212,13 @@ module.exports = {
             }
         }).then(function (v) {
             if(v){
+                Models.Video.update({
+                    visits : v.visits +1
+                },{
+                    where:{
+                        id: v.id
+                    }
+                });
                 res.render('site/pages/video',{v:v,res:res,needFul:needFul});
             }
             else {
@@ -191,6 +235,13 @@ module.exports = {
             }
         }).then(function (v) {
             if(v){
+                Models.FreeArticle.update({
+                    visits : v.visits +1
+                },{
+                    where:{
+                        id: v.id
+                    }
+                });
                 res.render('site/pages/free',{v:v,res:res,needFul:needFul});
             }
             else {
@@ -200,9 +251,36 @@ module.exports = {
         })
     },
     freeList:function(req,res){
-
+        type = prInj.PrInj(req.params.type);
+            if (type == '1'){
+                    ftype = 'PDF'
+            }
+            else if(type == '2'){
+                    ftype = 'Powerpoint'
+            }
+            else {
+                ftype = 'CheetSheet';
+            }
+            Models.FreeArticle.findAll({
+                where:{
+                    type : type,
+                    status : 1
+                }
+            }).then(function(freeArt){
+                    if(freeArt.length > 0){
+                        res.render('site/pages/freeList',{ftype:ftype,freeArts:freeArt,res:res,needFul:needFul});
+            }
+            else {
+                    res.status(404);
+                    res.render('errors/404');
+            }
+            }).catch(function(error){
+                res.status(404);
+                res.render('errors/404');
+            })
     },
     checkLogin:function(req,res){
+    
 
         var pass     = prInj.PrInj(req.body.password);
         var email   = prInj.PrInj(req.body.email);

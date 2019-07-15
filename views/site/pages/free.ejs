@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../layouts/head.ejs",{
+title:"teklafilm :: "+ v.title ,
+des:"teklafilm :: "+ v.title ,
+pageUrl:"https://teklafilm.com"
+}) %>
+<body   >
+
+<% include ../layouts/svg.ejs %>
+
+<%- include ../layouts/header.ejs%>
+
+
+
+<div class="container" style="margin-top:60px">
+    <div class="row">
+        <div class="col-md-8 p-1">
+            <div class="row  make-me-sticky">
+                <div class="col-12 bg-white content-cl shadow-sm border p-1">
+                    <div class="col-12 p-1">
+                        <div class="row">
+                            <div class="col-4">
+                                <a class="custom-link" title="<%- v.title %>" href="<%- host+'/free/'+v.slug %>">
+                                    <img src="<%- host+"/"+v.thumb %>" title="<%- v.title %>" alt="<%- v.title %>"  style="width:100%;">
+                                </a>
+                            </div>
+                            <div class="col-8 my-auto"><%- v.title %></div>
+                        </div>
+                        <hr >
+                        <div class="row">
+                            <div class="col-12">
+                                <%- v.des %>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div align="center">
+                                    <a href="<%-host%>/downloadFree/<%-v.id%>" class="custum-link btn-success btn pt-3 pb-3 pr-5 pl-5 text-white">Download File</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 p-1">
+            <%- include("../layouts/sidebar.ejs",{
+            res:res
+            }) %>
+        </div>
+    </div>
+</div>
+<%- include("../layouts/footer.ejs",{
+res:res
+}) %>
+
+
+</body>
+<%- include ../layouts/scripts.ejs%>
+
+</html>

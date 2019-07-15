@@ -14,6 +14,11 @@
     width: 100%;
     max-width: 100%;
 }
+.topIcon{
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+}
 .custum-link:hover {
     text-decoration: none;
 }
@@ -41,4 +46,24 @@
 .sideBarLink {
     padding-bottom: 4px !important;
     padding-top: 8px !important;
+}
+.make-me-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+
+    padding: 0 15px;
+}
+.topBtn {
+    font-size: 16px !important;
+    background: #2DB84C !important;
+}
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    cursor: pointer;
 }
