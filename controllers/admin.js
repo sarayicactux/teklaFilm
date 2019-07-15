@@ -526,6 +526,7 @@ module.exports = {
             })
             .catch(function (err) {
                 console.log(err);
+                res.status(500);
                 res.render('errors/500');
             })
     },
@@ -563,6 +564,44 @@ module.exports = {
 
 
     },
+    pays:function(req,res){
+        Models.Pay.findAll({
+            include:[
+                Models.User,
+                Models.Video
+            ]
+        })
+        .then(function(pays){
+            user = req.session.user;
+                res.render('panel/statistics/pays',{pays:pays,user:user});
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.status(500);
+            res.render('errors/500');
+        })
+    },
+    users:function(req,res){
+            Models.User.findAll({
+                where:{
+                    id:{
+                        $ne : 1
+                    }
+                },
+                include:[
+                    Models.Pay
+                ]
+            })
+            .then(function(usrs){
+                user = req.session.user;
+                res.render('panel/statistics/users',{usrs:usrs,user:user});
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.status(500);
+                res.render('errors/500');
+            })
+    }
 
 
 

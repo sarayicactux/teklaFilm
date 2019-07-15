@@ -39,6 +39,10 @@ router.route('/sliders/changeStatus').post(admin.slidersChangeStatus);
 router.route('/sliders/:id/edit').get(admin.slidersEdit);
 router.route('/sliders/:id/update').post(admin.slidersUpdate);
 
+// Statistics
+router.route('/users').get(admin.users);
+router.route('/pays').get(admin.pays);
+
 
 
 
