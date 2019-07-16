@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../layouts/head.ejs",{
+title:"teklafilm" ,
+des:"" ,
+pageUrl:"https://teklafilm.com"
+}) %>
+<body   >
+
+<% include ../layouts/svg.ejs %>
+
+<%- include ../layouts/header.ejs%>
+
+
+
+<div class="container" style="margin-top:60px">
+    <div class="row">
+        <div class="col-md-8 p-1">
+            <div class="row  make-me-sticky">
+                <div class="col-12 bg-white content-cl shadow-sm border p-1">
+                    <div class="col-12 p-1">
+                        <ul class="nav nav-tabs">
+                        
+                            <li class="nav-item">
+                                <a class="nav-link active custum-link" data-toggle="tab" href="#ChangePassword">Change Password</a>
+                            </li>
+                            
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="ChangePassword" class="container tab-pane fade"><br>
+                                <div class="row">
+                                    <div class="col-md-3 col-0"></div>
+                                    <div class="col-12 col-md-6">
+                                            <% if (error.length >2){%>
+                                                <div class="col-12 bg-danger text-white p-2 mb-3"><%- error%></div>
+                                            <%}%>
+                                        
+                                        <form method="post" action="<%-host%>/changePassword">
+                                            
+
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label>Password</label>
+                                                    <input required type="password" name="password" id="password"  class="form-control " >
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label>New Password</label>
+                                                    <input required type="password" name="new_password" id="new_password"  class="form-control " >
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label>Confirm Password</label>
+                                                    <input required type="password" name="confirm" id="confirm"  class="form-control " >
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <input type="submit" value="Change Password"  class="form-control btn-sm btn-info " >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-0"></div>
+                                </div>
+                            </div>
+                            <div id="ForgetPass" class="container tab-pane fade"><br>
+                                <div class="row">
+                                    <div class="col-md-3 col-0"></div>
+                                    <div class="col-12 col-md-6">
+                                        <form method="post" action="<%-host%>/forgetpass">
+
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label>Email</label>
+                                                    <input required type="text" name="forget_email" id="forget_email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  class="email form-control " >
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <input type="submit" value="Create a new password and mail me"  class="form-control btn-sm btn-info " >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-0"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 p-1">
+            <%- include("../layouts/sidebar.ejs",{
+            res:res
+            }) %>
+        </div>
+    </div>
+</div>
+    <%- include("../layouts/footer.ejs",{
+    res:res
+    }) %>
+
+
+</body>
+<%- include ../layouts/scripts.ejs%>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</html>

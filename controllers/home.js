@@ -250,6 +250,43 @@ module.exports = {
             }
         })
     },
+    profile:function(req,res){
+        if (!(res.user)){
+                res.redirect(host);return;
+        }
+            id = req.session.user.id;
+            Models.User.findByPk(id)
+            .then(function(usr){
+                    Models.Pay.findAll({
+                        where:{
+                            user_id : id
+                        },
+                        include:[
+                            Models.Video
+                        ]
+                    })
+                    .then(function(pays){
+                        error = '';
+                        res.render('site/pages/profile',{error:error,pays:pays,usr:usr,res:res,needFul:needFul});
+                    })
+            })
+            .catch(function(err){
+                res.status(500);
+                res.status('errors/500');
+            })
+    },
+    changepass:function(req,res){
+            error = '';
+            res.render('site/pages/changepass',{error:error,res:res,needFul:needFul});
+    },
+    changePassword:function(req,res){
+        password        = prInj.PrInj(req.params.password);
+        new_password    = prInj.PrInj(req.params.new_password);
+        confirm         = prInj.PrInj(req.params.confirm);
+        if (new_password != confirm){
+
+        }
+    },
     freeList:function(req,res){
         type = prInj.PrInj(req.params.type);
             if (type == '1'){
