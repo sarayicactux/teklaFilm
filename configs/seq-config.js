@@ -1,6 +1,6 @@
 const   Sequelize = require('sequelize');
 const   Op        = Sequelize.Op;
-
+// 03W9ZuHht3#Z
 const sequelize = new Sequelize('teklafilm', 'root', '', {
     dialect: 'mysql',
     logging: false,

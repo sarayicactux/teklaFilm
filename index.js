@@ -136,7 +136,15 @@ function checkAdmin(req,res,next){
             return;
         }
         else {
-            next();
+			if (req.session.user.id == 1){
+				next();
+				return;
+			}
+			else{
+				res.redirect(host);
+				return;
+			}
+            
 
         }
 

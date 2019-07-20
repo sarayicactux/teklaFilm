@@ -410,13 +410,13 @@ module.exports = {
                             var transporter = nodemailer.createTransport({
                                 service: 'gmail',
                                 auth: {
-                                    user: 'morteza.sajadi6696@gmail.com',
-                                    pass: 'x@M1r8GUBY'
+                                    user: 'teklafilm@gmail.com',
+                                    pass: 'araktehran'
                                 }
                             });
 
                             var mailOptions = {
-                                from: 'morteza.sajadi6696@gmail.com',
+                                from: 'teklafilm@gmail.com',
                                 to: email,
                                 subject: 'Recovery Password Email ',
                                 html: '<h1>Dear '+row.fname+' '+row.lname +' </h1>'+'<p>\n' +
@@ -505,13 +505,13 @@ module.exports = {
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: 'morteza.sajadi6696@gmail.com',
-                        pass: 'x@M1r8GUBY'
+                        user: 'teklafilm@gmail.com',
+                        pass: 'araktehran'
                     }
                 });
 
                 var mailOptions = {
-                    from: 'morteza.sajadi6696@gmail.com',
+                    from: 'teklafilm@gmail.com',
                     to: form.regiser_email,
                     subject: 'Activation Email ',
                     html: '<h1>Dear '+form.fname+' '+form.lname +' Welcome</h1>'+'<p>\n' +
@@ -537,6 +537,7 @@ module.exports = {
 
 
     uploading:function(req,res){
+		
         var tmp_path = req.file.path;
         var inputId  = req.body.inputId;
         var mimeType = req.body.mimeType;

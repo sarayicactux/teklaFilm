@@ -1,9 +1,9 @@
-<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- userFile %>','<%- inputId %>');" class="btn btn-danger" title="delete"  >
+The file was loaded successfully, to view it
+<a href="<%- host +'/'+ userFile %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
+    <i  class="fa fa-eye-slash"></i>
+</a>
+<input id="<%- inputId %>Path" name="<%- inputId %>Path" type="hidden" value="<%- userFile %>">
+, for delete
+<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- userFile %>','<%- inputId %>');" class="btn btn-danger btn-sm" title="delete"  >
     <i  class="fa fa-recycle"></i>
 </a>
-<br>
-
-<a href="/<%- userFile %>" target="_blank" >
-    <img height="90px" width="90px" src="/<%- userFile %>" class="user-image">
-</a>
-<input id="<%- inputId %>Path" type="hidden" value="<%- userFile %>">
