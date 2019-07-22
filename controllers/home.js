@@ -96,7 +96,7 @@ module.exports = {
             res.redirect(host+'/profile')
         }
     },
-    download:function(req,res){
+   /* download:function(req,res){
 
         id = prInj.PrInj(req.params.id);
         Models.Video.findByPk(id).then(function (v) {
@@ -146,6 +146,16 @@ module.exports = {
                 res.status(500);
                 res.render('errors/500');
         });
+    },*/
+    download:function(req,res){
+
+        if(res.user){
+            res.redirect(host+'/profile')
+
+        }
+        else {
+            res.redirect(host+'/singIn');return;
+        }
     },
     downloadFree:function(req,res){
 
@@ -250,7 +260,7 @@ module.exports = {
             }
         })
     },
-    profile:function(req,res){
+    /*profile:function(req,res){
         if (!(res.user)){
                 res.redirect(host);return;
         }
@@ -269,6 +279,31 @@ module.exports = {
                         error = '';
                         res.render('site/pages/profile',{error:error,pays:pays,usr:usr,res:res,needFul:needFul});
                     })
+            })
+            .catch(function(err){
+                res.status(500);
+                res.status('errors/500');
+            })
+    },*/
+    profile:function(req,res){
+        if (!(res.user)){
+            res.redirect(host);return;
+        }
+        id = req.session.user.id;
+        Models.User.findByPk(id)
+            .then(function(usr){
+                Models.Pay.findOne({
+                    where:{
+                        user_id : id
+                    }
+                })
+                    .then(function(pays){
+                        Models.File.findAll().then(function (files) {
+
+                            res.render('site/pages/profile',{files:files,pays:pays,usr:usr,res:res,needFul:needFul});
+
+                        })
+                         })
             })
             .catch(function(err){
                 res.status(500);
@@ -338,13 +373,13 @@ module.exports = {
                     else {
 
                         req.session.user = row;
-
-                        if (req.session.red){
-                            res.redirect(req.session.red);return;
-                        }
-                        else {
-                            res.redirect(host + '/profile');return;
-                        }
+                        res.redirect(host + '/profile');return;
+                        // if (req.session.red){
+                        //     res.redirect(req.session.red);return;
+                        // }
+                        // else {
+                        //     res.redirect(host + '/profile');return;
+                        // }
 
                     }
 
@@ -542,12 +577,14 @@ module.exports = {
         var inputId  = req.body.inputId;
         var mimeType = req.body.mimeType;
         dir = 'files';
+        var rand = rn(options);
         if (mimeType == '2'){
             dir = vDir;
+            rand = '';
         }
         /** The original name of the uploaded file
          stored in the variable "originalname". **/
-        var rand = rn(options);
+
         var userFile    = 'panel/'+dir+'/' + rand + req.file.originalname;
         var target_path = appRoot + '/public/panel/'+dir+'/' + rand + req.file.originalname;
         /** A better way to copy the uploaded file. **/

@@ -6,6 +6,7 @@ const FreeArticle           = require('../models/sequelize/FreeArticle');
 const Pay                   = require('../models/sequelize/Pay');
 const Slider                = require('../models/sequelize/Slider');
 const Video                 = require('../models/sequelize/Video');
+const File                  = require('../models/sequelize/File');
 
 
 
@@ -18,8 +19,8 @@ const Video                 = require('../models/sequelize/Video');
 User.hasMany(Pay,{foreignKey:'user_id'});
 Pay.belongsTo(User,{foreignKey:'user_id'});
 
-Video.hasMany(Pay,{foreignKey: 'video_id'});
-Pay.belongsTo(Video,{foreignKey: 'video_id'});
+//Video.hasMany(Pay,{foreignKey: 'video_id'});
+//Pay.belongsTo(Video,{foreignKey: 'video_id'});
 
 
 
@@ -30,6 +31,7 @@ Models.Slider       = Slider;
 Models.Pay          = Pay;
 Models.Video        = Video;
 Models.User         = User;
+Models.File         = File;
 
 
 

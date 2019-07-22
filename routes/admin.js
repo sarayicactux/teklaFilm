@@ -39,6 +39,15 @@ router.route('/sliders/changeStatus').post(admin.slidersChangeStatus);
 router.route('/sliders/:id/edit').get(admin.slidersEdit);
 router.route('/sliders/:id/update').post(admin.slidersUpdate);
 
+
+// files
+router.route('/files/new').get(admin.filesNew);
+router.route('/files/create').post(admin.filesCreate);
+router.route('/files/list').get(admin.filesList);
+router.route('/files/:id/edit').get(admin.filesEdit);
+router.route('/files/:id/update').post(admin.filesUpdate);
+
+
 // Statistics
 router.route('/users').get(admin.users);
 router.route('/pays').get(admin.pays);

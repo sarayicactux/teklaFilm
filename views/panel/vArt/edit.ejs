@@ -112,7 +112,7 @@ des:"TeklaFilm::ControlPanel" ,
 
                                         <div class="col-md-4 form-group">
 
-                                            <label   style="padding:2px">Demo</label>
+                                            <label   style="padding:2px">Video</label>
 
 
 
@@ -145,44 +145,44 @@ des:"TeklaFilm::ControlPanel" ,
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <!--<div class="row">-->
 
 
-                                        <div class="col-md-4 form-group">
+                                        <!--<div class="col-md-4 form-group">-->
 
-                                            <label   style="padding:2px">main video</label>
-
-
-
-                                            <label for="main" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>
-                                            <input type="file" name="main"  onchange="uploadFile('main','2')" id="main"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8 form-group">
-
-
-                                <span id="tagmain">
-<input id="mainPath" value="<%- v.main_file%>" type="hidden" class="form-control">
-
-The file was loaded successfully, to view it
-<a href="<%- host +'/'+ v.main_file %>" target="_blank"  class="btn btn-info btn-sm" title="view" >
-    <i  class="fa fa-eye-slash"></i>
-</a>
-, for delete
-<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.main_file %>','main');" class="btn btn-danger btn-sm" title="delete"  >
-    <i  class="fa fa-recycle"></i>
-</a>
-</span>
+                                            <!--<label   style="padding:2px">main video</label>-->
 
 
 
+                                            <!--<label for="main" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>-->
+                                            <!--<input type="file" name="main"  onchange="uploadFile('main','2')" id="main"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />-->
 
-                                        </div>
-                                    </div>
+                                        <!--</div>-->
+
+
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-8 form-group">-->
+
+
+                                <!--<span id="tagmain">-->
+<!--<input id="mainPath" value="<%- v.main_file%>" type="hidden" class="form-control">-->
+
+<!--The file was loaded successfully, to view it-->
+<!--<a href="<%- host +'/'+ v.main_file %>" target="_blank"  class="btn btn-info btn-sm" title="view" >-->
+    <!--<i  class="fa fa-eye-slash"></i>-->
+<!--</a>-->
+<!--, for delete-->
+<!--<a href="javascript:void(0)" onclick="deleteUploadedFile('<%- v.main_file %>','main');" class="btn btn-danger btn-sm" title="delete"  >-->
+    <!--<i  class="fa fa-recycle"></i>-->
+<!--</a>-->
+<!--</span>-->
+
+
+
+
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                     <div class="row">
                                         <div class="col-md-2  form-group">
@@ -273,8 +273,8 @@ The file was loaded successfully, to view it
         title       = $('#title').val();
         thumb       = $('#imagePath').val();
         demo_file   = $('#demoPath').val();
-        main_file   = $('#mainPath').val();
-        if (   des == ''   || title == '' ||  text == '' ||  main_file == '' ||  thumb == '' ||  demo_file == '' ){
+        //main_file   = $('#mainPath').val();
+        if (   des == ''   || title == '' ||  text == '' ||   thumb == '' ||  demo_file == '' ){
 
             $('#alertmsg').html('Please fill all fields');
             $('#sendVideo').prop('disabled', false);
@@ -289,7 +289,7 @@ The file was loaded successfully, to view it
                     title      : title,
                     thumb      : thumb,
                     demo_file  : demo_file,
-                    main_file  : main_file,
+                    //main_file  : main_file,
                     id         : '<%- v.id %>',
                 },
                 method: 'POST',

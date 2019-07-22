@@ -1,13 +1,18 @@
 <svg  onclick="topFunction()" id="myBtn" class="topIcon  text-danger"><use xlink:href="#up"></use></svg>
 <nav class="navbar navbar-expand-sm navbar-dark navC fixed-top">
     <div class="col-6 p-0">
-        <a class="navbar-brand" href="<%- host %>">Teklafiml.com</a>
+        <a class="navbar-brand" href="<%- host %>">
+            <img src="<%- host %>/panel/logo.png" height="58px">
+        </a>
+        <a class="navbar-brand" href="<%- host %>">Home</a>
     </div>
 
     <div class="col-6 p-0">
         <% if (res.user){ %>
             <a class="navbar-brand float-right"  href="<%- host %>/logOut">LogOut</a>
             <a class="navbar-brand float-right"  href="<%- host %>/profile">Profile</a>
+            <a class="navbar-brand float-right"  href="<%- host %>/changePassword">Change Password</a>
+
 
     <% } else {%>
         <a class="navbar-brand float-right"  href="<%- host %>/singIn">Sign In</a>

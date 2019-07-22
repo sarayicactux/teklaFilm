@@ -33,7 +33,7 @@ des:"TeklaFilm::ControlPanel" ,
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Create new video article
+                                <h2>Create new Slider
 
                                 </h2>
 
@@ -52,66 +52,16 @@ des:"TeklaFilm::ControlPanel" ,
 
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>description<span class="required">*</span></label>
-                                            <textarea name="des" id="des"  class="form-control"></textarea>
-                                        </div>
-
-
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 form-group">
-                                            <label>text<span class="required">*</span></label>
-                                            <textarea id="text" rows="15"  class="form-control"></textarea>
-
-
-                                        </div>
-
-
-
-                                    </div>
-                                    <div class="row">
 
 
                                         <div class="col-md-4 form-group">
 
-                                            <label   style="padding:2px">&nbsp;thumb</label>
+                                            <label   style="padding:2px">&nbsp;File</label>
 
 
 
-                                            <label for="image" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose image</strong></label>
-                                            <input type="file" name="image"  onchange="uploadFile('image','4')" id="image" accept=".jpeg,.jpg,.png" class="inputfile" data-multiple-caption="{count} files selected" multiple />
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 form-group">
-
-
-                                <span id="tagimage">
-<input id="imagePath" value="" type="hidden" class="form-control">
-</span>
-
-
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-
-                                        <div class="col-md-4 form-group">
-
-                                            <label   style="padding:2px">Video</label>
-
-
-
-                                            <label for="demo" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>
-                                            <input type="file" name="demo"  onchange="uploadFile('demo','3')" id="demo"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+                                            <label for="file" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose file</strong></label>
+                                            <input type="file" name="file"  onchange="uploadFile('file','2')" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple />
 
                                         </div>
 
@@ -121,8 +71,8 @@ des:"TeklaFilm::ControlPanel" ,
                                         <div class="col-md-8 form-group">
 
 
-                                <span id="tagdemo">
-<input id="demoPath" value="" type="hidden" class="form-control">
+                                <span id="tagfile">
+<input id="filePath" value="" type="hidden" class="form-control">
 </span>
 
 
@@ -130,42 +80,13 @@ des:"TeklaFilm::ControlPanel" ,
 
                                         </div>
                                     </div>
-
-                                    <!--<div class="row">-->
-
-
-                                        <!--<div class="col-md-4 form-group">-->
-
-                                            <!--<label   style="padding:2px">main video</label>-->
-
-
-
-                                            <!--<label for="main" class="inputfile-6"><span></span> <strong><i class="fa fa-cloud-upload" ></i> choose video</strong></label>-->
-                                            <!--<input type="file" name="main"  onchange="uploadFile('main','2')" id="main"  accept=".mp4,.MP4" class="inputfile" data-multiple-caption="{count} files selected" multiple />-->
-
-                                        <!--</div>-->
-
-
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-md-8 form-group">-->
-
-
-                                <!--<span id="tagmain">-->
-<!--<input id="mainPath" value="" type="hidden" class="form-control">-->
-<!--</span>-->
-
-
-
-
-                                        <!--</div>-->
-                                    <!--</div>-->
+                                    
 
                                     <div class="row">
                                         <div class="col-md-2  form-group">
                                             <label >&nbsp;</label>
 
-                                            <button data-pid="q" type="button" id="sendVideo" class="form-control btn btn-success">Send</button>
+                                            <button data-pid="q" type="button" id="sendSlider" class="form-control btn btn-success">Send</button>
 
                                         </div>
                                     </div>
@@ -243,30 +164,22 @@ des:"TeklaFilm::ControlPanel" ,
 
 
     })
-    $('#sendVideo').click(function () {
-        $('#sendVideo').prop('disabled', true);
-        text        = tinyMCE.editors[$('#text').attr('id')].getContent();
-        des         = $('#des').val();
+    $('#sendSlider').click(function () {
+        $('#sendSlider').prop('disabled', true);
         title       = $('#title').val();
-        thumb       = $('#imagePath').val();
-        demo_file   = $('#demoPath').val();
-        //main_file   = $('#mainPath').val();
-        if (   des == ''   || title == '' ||  text == '' ||   thumb == '' ||  demo_file == '' ){
+        file_url    = $('#filePath').val();
+        if (   title == ''  ||  file_url == ''  ){
 
             $('#alertmsg').html('Please fill all fields');
-            $('#sendVideo').prop('disabled', false);
+            $('#sendSlider').prop('disabled', false);
             return false;
         }
         else {
             $.ajax({
                 url: 'create',
                 data: {
-                    text       : text,
-                    des        : des,
                     title      : title,
-                    thumb      : thumb,
-                    demo_file  : demo_file,
-                    //main_file  : main_file,
+                    file_url   : file_url,
                                  },
                 method: 'POST',
                 success :function(data){
@@ -290,38 +203,19 @@ des:"TeklaFilm::ControlPanel" ,
 
 
                     }
+                    else {
+                        new PNotify({
+                            title: 'Error',
+                            text: 'Internal server error' +
+                                '<br>',
+                            type: 'danger',
+                            styling: 'bootstrap3'
+                        });
+                    }
 
 
                 }});
         }
-    });
-
-
-    tinymce.init({ selector:'#text',
-        directionality : "ltr",
-        language: 'en',
-        theme: 'modern',
-        plugins: [
-            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen',
-            'insertdatetime media nonbreaking save table contextmenu directionality',
-            'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-        ],
-        toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons | codesample',
-        image_advtab: true,
-        templates: [
-            { title: 'Test template 1', content: 'Test 1' },
-            { title: 'Test template 2', content: 'Test 2' }
-        ],
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css',
-            'admin/build/css/tiny.css'
-        ],
-        images_upload_url: '/upload',
-        relative_urls : false,
-        remove_script_host : false,
-        document_base_url : "https://teklafilm.com/"
     });
 
 </script>

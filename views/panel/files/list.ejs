@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html >
+<%- include("../../panel/layouts/head.ejs",{
+title:"TeklaFilm::ControlPanel" ,
+des:"TeklaFilm::ControlPanel" ,
+}) %>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <%- include ../../panel/layouts/menu.ejs  %>
+        <!-- top navigation -->
+        <%- include ../../panel/layouts/topNav.ejs  %>
+        <!-- /top navigation -->
+        <!-- /header content -->
+
+        <!-- page content -->
+        <div id="panelContent" class="right_col" role="main">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="preloader loading">
+                        <span class="slice"></span>
+                        <span class="slice"></span>
+                        <span class="slice"></span>
+                        <span class="slice"></span>
+                        <span class="slice"></span>
+                        <span class="slice"></span>
+                    </div>
+                    <div class="page-loader-wrapper">
+                    </div>
+                    <!--<div class="page-loader-wrapper2">-->
+                    <!--&lt;!&ndash;<img  src="admin/810(3).svg">&ndash;&gt;-->
+                    <!--<h2>Please wait ...</h2>-->
+                    <!--</div>-->
+                    <div class="x_panel">
+                        <div class="box-header table-title">
+                            <h3 class="box-title">List of Files , <%- arts.length %></h3>
+                        </div>
+                        <table id="list" class="table table-striped table-bordered dt-responsive nowrap"
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>title</th>
+                                <th>create date</th>
+                                <th>update date</th>
+                                <th>operations</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            <% for(i=0;i<arts.length;i++) {
+
+                                item = arts[i];
+                                cd = item.created_at
+                                ud = item.updated_at
+                            %>
+                            <tr>
+                                <td><%- i+1 %></td>
+                                <td><%= item.title %></td>
+                                <td class="fa-num"><%-  cd.getFullYear() + '-' + (cd.getMonth()+1) + '-' + cd.getDate() %></td>
+                                <td class="fa-num"><%-  ud.getFullYear() + '-' + (ud.getMonth()+1) + '-' + ud.getDate() %></td>
+                                <td><div class="btn-group">
+
+                                        <a type="button" title="edit" href="<%= item.id %>/edit"  class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>
+
+                                    </div></td>
+
+                            </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <%- include ../../panel/layouts/footer.ejs %>
+    </div>
+</div>
+
+<%- include ../../panel/layouts/scripts.ejs %>
+<div id="reload" style="display:none;"></div>
+<script>
+    $('#list').dataTable({
+        "pageLength": 30,
+        "fixedHeader": {
+            header: true,
+        },
+        "lengthMenu": [[30, 60,  100,200,300,500,5000], [30, 60, 100, 200, 300, 500, 5000]],
+        "order": [[ 0, 'asc' ]]
+    });
+    $(function () {
+        //Initialize Select2 Elements
+        setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
+        // setTimeout(function () { $('.page-loader-wrapper2').fadeOut(); }, 50);
+        setTimeout(function () { $('.preloader').fadeOut(); }, 50);
+
+
+    })
+</script>
+</body>
+</html>

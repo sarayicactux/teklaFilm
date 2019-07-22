@@ -333,7 +333,7 @@ module.exports = {
         text        = inputs.text;
         thumb       = inputs.thumb;
         demo_file   = inputs.demo_file;
-        main_file   = inputs.main_file;
+        //main_file   = inputs.main_file;
         var slug = title;
         slug = slug.replace(/ /g,'-');
         slug = slug.replace('(','-');
@@ -349,7 +349,7 @@ module.exports = {
             title          : title,
             slug           : slug,
             des            : des,
-            main_file      : main_file,
+            //main_file      : main_file,
             demo_file      : demo_file,
             thumb          : thumb,
             created_at     : created_at,
@@ -417,7 +417,7 @@ module.exports = {
         text        = inputs.text;
         thumb       = inputs.thumb;
         demo_file   = inputs.demo_file;
-        main_file   = inputs.main_file;
+        //main_file   = inputs.main_file;
 
 
         now = new Date();
@@ -428,7 +428,7 @@ module.exports = {
             text           : text,
             title          : title,
             des            : des,
-            main_file      : main_file,
+            //main_file      : main_file,
             demo_file      : demo_file,
             thumb          : thumb,
             updated_at     : updated_at,
@@ -564,11 +564,103 @@ module.exports = {
 
 
     },
+
+    filesNew:function (req,res) {
+
+        user = req.session.user;
+        res.render('panel/files/add',{user:user});
+
+    },
+    filesCreate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+
+        title       = inputs.title;
+        file_url    = inputs.file_url;
+        now = new Date();
+        var created_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        var newF = {
+            file_url      : file_url,
+            title         : title,
+            created_at     : created_at,
+            updated_at     : created_at
+        };
+
+        Models.File.create(newF)
+            .then(function (Fnew) {
+
+
+                res.json({status:true});return;
+
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.json({status:false});return;
+            });
+
+    },
+    filesList:function (req,res) {
+
+        Models.File.findAll({
+            order:[
+                ['id','DESC']
+            ]
+        }).then(function (arts) {
+            user = req.session.user;
+            res.render('panel/files/list',{arts:arts,user:user});
+        })
+
+
+    },
+    filesEdit:function (req,res) {
+        inputs = prInj.PrAll(req.params);
+        Models.File.findByPk(inputs.id)
+            .then(function (v) {
+                user = req.session.user;
+                res.render('panel/files/edit',{v:v,user:user});
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.status(500);
+                res.render('errors/500');
+            })
+    },
+    filesUpdate:function (req,res) {
+        inputs      = prInj.PrAll(req.body);
+        title       = inputs.title;
+        file_url    = inputs.file_url;
+
+
+        now = new Date();
+        var updated_at = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+
+        var UpdateC = {
+            file_url       : file_url,
+            title          : title,
+            updated_at     : updated_at,
+        };
+        var where = {
+            where:{id:inputs.id}
+        };
+        Models.File.update(UpdateC,
+            where)
+            .then(function (rowsUpdated) {
+                res.json({status:true});return;
+            }).catch(function (err) {
+            console.log(err);
+            res.json({status:false});return;
+        })
+
+
+
+    },
+
     pays:function(req,res){
         Models.Pay.findAll({
             include:[
                 Models.User,
-                Models.Video
+                //Models.Video
             ]
         })
         .then(function(pays){
